@@ -1,0 +1,16 @@
+.MyTarjet{
+    width:33% !important;
+    overflow: auto !important;
+}
+.MyTextTruncate{
+    overflow: hidden;
+    display: -webkit-box;
+    height: 90px;
+}
+
+
+@media (max-width: 1200px) {
+    .MyTarjet{
+        width:100% !important;
+    }
+}

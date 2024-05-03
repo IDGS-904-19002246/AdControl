@@ -1,0 +1,128 @@
+<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+
+<div id="kt_project_targets_table_pane" class="tab-pane fade active show" role="tabpanel">
+    <div class="card card-flush">
+        <div class="card-body pt-3">
+            <!--begin::Table-->
+            <div id="kt_profile_overview_table_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer">
+                <div id="" class="table-responsive">
+                    <table id="kt_profile_overview_table"
+                        class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable"
+                        style="width: 0px;">
+                        <colgroup>
+                            <col style="width: 0px;">
+                            <col style="width: 0px;">
+                            <col style="width: 0px;">
+                            <col style="width: 0px;">
+                            <col style="width: 0px;">
+                            <col style="width: 0px;">
+                        </colgroup>
+                        <thead class="fs-7 text-gray-500 text-uppercase">
+                            <tr role="row">
+                                <th class="min-w-250px dt-orderable-asc dt-orderable-desc dt-ordering-desc"
+                                    data-dt-column="0" rowspan="1" colspan="1"
+                                    aria-label="Target: Activate to remove sorting" tabindex="0" aria-sort="descending">
+                                    <span class="dt-column-title" role="button">Target</span><span
+                                        class="dt-column-order"></span></th>
+                                <th class="min-w-90px dt-orderable-asc dt-orderable-desc" data-dt-column="1" rowspan="1"
+                                    colspan="1" aria-label="Section: Activate to sort" tabindex="0"><span
+                                        class="dt-column-title" role="button">Section</span><span
+                                        class="dt-column-order"></span></th>
+                                <th class="min-w-150px dt-orderable-asc dt-orderable-desc" data-dt-column="2"
+                                    rowspan="1" colspan="1" aria-label="Due Date: Activate to sort" tabindex="0"><span
+                                        class="dt-column-title" role="button">Due Date</span><span
+                                        class="dt-column-order"></span></th>
+                                <th class="min-w-90px dt-orderable-asc dt-orderable-desc" data-dt-column="3" rowspan="1"
+                                    colspan="1" aria-label="Members: Activate to sort" tabindex="0"><span
+                                        class="dt-column-title" role="button">Members</span><span
+                                        class="dt-column-order"></span></th>
+                                <th class="min-w-90px dt-orderable-asc dt-orderable-desc" data-dt-column="4" rowspan="1"
+                                    colspan="1" aria-label="Status: Activate to sort" tabindex="0"><span
+                                        class="dt-column-title" role="button">Status</span><span
+                                        class="dt-column-order"></span></th>
+                                <th class="min-w-50px dt-orderable-asc dt-orderable-desc" data-dt-column="5" rowspan="1"
+                                    colspan="1" aria-label=": Activate to sort" tabindex="0"><span
+                                        class="dt-column-title" role="button"></span><span
+                                        class="dt-column-order"></span></th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="fs-6">
+                            <tr>
+                                <td class="fw-bold sorting_1">
+                                    <a href="#" class="text-gray-900 text-hover-primary">User Module Testing</a>
+                                </td>
+                                <td data-order="Invalid date" class="">
+                                    <span class="badge badge-light fw-semibold me-auto">Development</span>
+                                </td>
+                                <td class="">Jun 14, 2020</td>
+                                <td class="">
+                                    <div class="symbol-group symbol-hover fs-8">
+                                        <div class="symbol symbol-25px symbol-circle" data-bs-toggle="tooltip"
+                                            aria-label="Francis Mitcham" data-bs-original-title="Francis Mitcham"
+                                            data-kt-initialized="1">
+                                            <img alt="Pic" src="assets/media/avatars/300-20.jpg">
+                                        </div>
+                                        <div class="symbol symbol-25px symbol-circle" data-bs-toggle="tooltip"
+                                            aria-label="Deanna Taylor" data-bs-original-title="Deanna Taylor"
+                                            data-kt-initialized="1">
+                                            <img alt="Pic" src="assets/media/avatars/300-23.jpg">
+                                        </div>
+                                        <div class="symbol symbol-25px symbol-circle" data-bs-toggle="tooltip"
+                                            data-bs-original-title="Mikaela Collins" data-kt-initialized="1">
+                                            <span class="symbol-label bg-info text-inverse-info fw-bold">M</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <span class="badge badge-light-primary fw-bold me-auto">In Progress</span>
+                                </td>
+                                <td class="text-end">
+                                    <a href="#" class="btn btn-bg-light btn-active-color-primary btn-sm">View</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold sorting_1">
+                                    <a href="#" class="text-gray-900 text-hover-primary">User Module Testing</a>
+                                </td>
+                                <td data-order="Invalid date" class="">
+                                    <span class="badge badge-light fw-semibold me-auto">Phase 2.6 QA</span>
+                                </td>
+                                <td class="">Nov 2, 2020</td>
+                                <td class="">
+                                    <div class="symbol-group symbol-hover fs-8">
+                                        <div class="symbol symbol-25px symbol-circle" data-bs-toggle="tooltip"
+                                            data-bs-original-title="Alan Warden" data-kt-initialized="1">
+                                            <span class="symbol-label bg-warning text-inverse-warning fw-bold">A</span>
+                                        </div>
+                                        <div class="symbol symbol-25px symbol-circle" data-bs-toggle="tooltip"
+                                            data-bs-original-title="Robin Watterman" data-kt-initialized="1">
+                                            <span class="symbol-label bg-success text-inverse-success fw-bold">R</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <span class="badge badge-light-success fw-bold me-auto">Completed</span>
+                                </td>
+                                <td class="text-end">
+                                    <a href="#" class="btn btn-bg-light btn-active-color-primary btn-sm">View</a>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+                <div id="" class="row">
+                    <div id=""
+                        class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start dt-toolbar">
+                    </div>
+                    <div id=""
+                        class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+                    </div>
+                </div>
+            </div>
+            <!--end::Table-->
+        </div>
+    </div>
+</div>
