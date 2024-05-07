@@ -16,9 +16,9 @@
     <!-- BUSCADOR -->
     <div class="container card my-4">
         <div class="row d-flex justify-content-between align-items-center py-3 py-lg-6">
-            <form id="buscador" method="post" action="index.php?search=active"
-                class="col-sm-6 my-0 d-flex justify-content-end" data-select2-id="select2-data-146-sh2u">
-                <input type="hidden" value="action" onlyread name="action">
+            <form id="buscador" method="post" action="index.php" class="col-sm-6 my-0 d-flex justify-content-end"
+                data-select2-id="select2-data-146-sh2u">
+                <input type="hidden" value="search" onlyread name="action">
                 <h3 class="fw-bold my-2">Productos </h3>
                 <input type="text" class="form-control form-control-sm form-control-solid mx-2" placeholder="Buscar"
                     name="nombre">
@@ -50,23 +50,12 @@
                     </li>
                 </ul>
 
-                <!-- <form class="my-0 d-flex justify-content-end" data-select2-id="select2-data-146-sh2u">
-                    <input type="number" class="form-control form-control-sm form-control-solid mx-2" placeholder="Año">
-                    <button type="submit"
-                        class="btn btn-sm px-2 btn-icon btn-active-primary btn-primary d-inline-block">
-                        <i class="ki-duotone ki-magnifier fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i></button>
-                </form> -->
-
                 <button type="button" class="btn btn-primary mx-5" data-bs-toggle="modal" data-bs-target="#nuevo">Añadir
                     Producto</button>
             </div>
 
 
         </div>
-
     </div>
     <div class="tab-content container h-75" style="padding:0px !important;">
 
@@ -97,14 +86,13 @@
                                     <a href="#" class="menu-link px-3">Ver detalles</a>
                                 </div>
                                 <div class="menu-item px-3">
-                                    <span class="menu-link px-3 btn-abrir-modal"
-                                        data-bs-toggle="modal" data-bs-target="#editar"
+                                    <span class="menu-link px-3 btn-abrir-modal" data-bs-toggle="modal"
+                                        data-bs-target="#editar"
                                         data-to-form='<?php echo json_encode($dato); ?>'>Editar</span>
-                                    
-                                    <!-- <a href="#" class="menu-link px-3">Editar</a> -->
                                 </div>
                                 <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3">Dar de baja</a>
+                                    <span class="menu-link px-3 btn-delete-modal"
+                                        data-to-form='<?php echo $dato['pid']; ?>'>Dar de baja</span>
                                 </div>
 
                             </div>
@@ -146,11 +134,11 @@
                             class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">
                             <thead class="fs-7 text-gray-500 text-uppercase">
                                 <tr>
-                                    <th class="min-w-250px">Manager</th>
-                                    <th class="min-w-150px">Date</th>
-                                    <th class="min-w-90px">Amount</th>
-                                    <th class="min-w-90px">Status</th>
-                                    <th class="min-w-50px text-end">Details</th>
+                                    <th class="min-w-250px">Nombre</th>
+                                    <th class="min-w-150px">Descripción</th>
+                                    <th class="min-w-90px">Inversión</th>
+                                    <th class="min-w-90px">Horas</th>
+                                    <th class="min-w-50px text-end">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="fs-6">
@@ -160,16 +148,36 @@
                                     <td><?php echo $dato['ptdescripcion']; ?></td>
                                     <td><?php echo $dato['pinversion']; ?></td>
                                     <td><?php echo $dato['phoras']; ?></td>
-                                    <td><button>
-                                            <a href=""></a>
-                                            <i class="ki-duotone ki-trash                        ">
+                                    <td>
+
+                                        <button type="button"
+                                            class="btn btn-primary btn-sm btn-icon btn-color-light-dark btn-active-light-primary float-end"
+                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                            <i class="ki-duotone ki-element-plus fs-2">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
                                                 <span class="path4"></span>
                                                 <span class="path5"></span>
                                             </i>
-                                        </button></td>
+                                        </button>
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px py-3"
+                                            data-kt-menu="true">
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3">Ver detalles</a>
+                                            </div>
+                                            <div class="menu-item px-3">
+                                                <span class="menu-link px-3 btn-abrir-modal" data-bs-toggle="modal"
+                                                    data-bs-target="#editar"
+                                                    data-to-form='<?php echo json_encode($dato); ?>'>Editar</span>
+                                            </div>
+                                            <div class="menu-item px-3">
+                                                <span class="menu-link px-3 btn-delete-modal"
+                                                    data-to-form='<?php echo $dato['pid']; ?>'>Dar de baja</span>
+                                            </div>
+                                        </div>
+
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -183,472 +191,68 @@
     </div>
     <hr>
 
-    <!-- INSERT -->
-    <div class="modal fade" id="nuevo" tabindex="-1" aria-modal="true">
-        <div class="modal-dialog modal-dialog-centered mw-900px">
-            <div class="modal-content">
+    <?php include '../modals/programas/insert.php' ?>
+    <?php include '../modals/programas/update.php' ?>
 
-                <div class="modal-header">
-                    <h2>Nuevo Programa</h2>
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </div>
-                </div>
 
-                <div class="modal-body py-lg-10 px-lg-10">
-
-                    <form class="form" id="kt_modal_create_app_form" method="POST" action="index.php">
-                        <input type="hidden" value="insert" onlyread name="action">
-                        <div class="current" data-kt-stepper-element="content">
-                            <div class="row">
-
-                                <div class="fv-row mb-10">
-                                    <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                        <span class="required">Nombre</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip"
-                                            title="Nombre completo del programa/curso">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <input type="text" class="form-control form-control-lg form-control-solid"
-                                        name="name" placeholder="" value="f" required />
-                                </div>
-
-                                <div class="fv-row mb-10">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Nombre Corto</span>
-                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                    title="Nombre corto del programa/curso">
-                                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </span>
-                                            </label>
-                                            <input type="text" class="form-control form-control-lg form-control-solid"
-                                                name="shortname" placeholder="" value="f" required />
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Nombre de Diploma</span>
-                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                    title="Nombre que tiene el certificado/área de trabajo">
-                                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </span>
-                                            </label>
-                                            <input type="text" class="form-control form-control-lg form-control-solid"
-                                                name="titlename" placeholder="" value="f" required />
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="fv-row mb-10">
-                                    <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                        <span class="required">Público objetivo</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip"
-                                            title="Descripción de a qué tipo de persona está dirigido el curso">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <input type="text" class="form-control form-control-lg form-control-solid"
-                                        name="public" placeholder="" value="f" required />
-                                </div>
-
-                                <div class="fv-row mb-10">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Slogan</span>
-                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                    title="Una breve frase o lema que represente su marca, producto o idea">
-                                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </span>
-                                            </label>
-                                            <input type="text" class="form-control form-control-lg form-control-solid"
-                                                name="slogan" placeholder="" value="f" />
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Nivel</span>
-                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                    title="Grado de habilidad o competencia">
-                                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </span>
-                                            </label>
-                                            <select name="level" required
-                                                class="form-control form-control-lg form-control-solid">
-                                                <option value="BASICO" select>BASICO</option>
-                                                <option value="INTERMEDIO">INTERMEDIO</option>
-                                                <option value="AVANZADO">AVANZADO</option>
-                                                <option value="EXPERTO">EXPERTO</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Tipo</span>
-                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                    title="Grado de habilidad o competencia">
-                                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </span>
-                                            </label>
-                                            <select name="type" required
-                                                class="form-control form-control-lg form-control-solid">
-                                                <?php foreach ($programs_types as $types): ?>
-                                                <option value="<?php echo $types['ptid']; ?>">
-                                                    <?php echo $types['ptdescripcion']; ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="fv-row mb-10">
-                                    <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                        <span class="required">Resumen</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip"
-                                            title="Descripción del contenido del programa/curso">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <textarea name="resume" class="form-control form-control-lg form-control-solid"
-                                        placeholder="Descripción del contenido del programa/curso" value=""
-                                        required>f</textarea>
-                                </div>
-
-                                <div class="fv-row mb-10">
-                                    <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                        <span class="required">Requisitos</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip"
-                                            title="Descripción del equipo/marerial/programas necesarios para el curso">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <textarea name="requeriments" class="form-control form-control-lg form-control-solid"
-                                        placeholder="Descripción del equipo/marerial/programas necesarios para el curso" value=""
-                                        required>f</textarea>
-                                </div>
-                            </div>
-
-                            <div class="d-flex flex-stack pt-10">
-
-                                <div class="me-2">
-                                    <button type="button" class="btn btn-lg btn-light-primary me-3"
-                                        data-kt-stepper-action="previous">
-                                        <i class="ki-duotone ki-arrow-left fs-3 me-1">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i>Back</button>
-                                </div>
-                                <div>
-                                    <button type="sumbit" class="btn btn-lg btn-primary" data-kt-stepper-action="submit"
-                                        form="kt_modal_create_app_form">
-                                        <span class="indicator-label">Submit
-                                            <i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i></span>
-                                        <span class="indicator-progress">Please wait...
-                                            <span
-                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                    <button type="button" class="btn btn-lg btn-primary"
-                                        data-kt-stepper-action="next">Continue
-                                        <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i></button>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- UPDATE -->
-    <div class="modal fade" id="editar" tabindex="-1" aria-modal="true">
-        <div class="modal-dialog modal-dialog-centered mw-900px">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h2>Editar Programa</h2>
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </div>
-                </div>
-
-                <div class="modal-body py-lg-10 px-lg-10 modal_update">
-
-                    <form class="form" id="modal_update" method="POST" action="index.php">
-                        <input type="hidden" value="update" onlyread name="action">
-                        <input type="hidden" value="update" onlyread name="id">
-                        <div class="current" data-kt-stepper-element="content">
-                            <div class="row">
-
-                                <div class="fv-row mb-10">
-                                    <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                        <span class="required">Nombre</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip"
-                                            title="Nombre completo del programa/curso">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <input type="text" class="form-control form-control-lg form-control-solid"
-                                        name="name" placeholder="" value="f" required />
-                                </div>
-
-                                <div class="fv-row mb-10">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Nombre Corto</span>
-                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                    title="Nombre corto del programa/curso">
-                                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </span>
-                                            </label>
-                                            <input type="text" class="form-control form-control-lg form-control-solid"
-                                                name="shortname" placeholder="" value="f" required />
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Nombre de Diploma</span>
-                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                    title="Nombre que tiene el certificado/área de trabajo">
-                                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </span>
-                                            </label>
-                                            <input type="text" class="form-control form-control-lg form-control-solid"
-                                                name="titlename" placeholder="" value="f" required />
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="fv-row mb-10">
-                                    <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                        <span class="required">Público objetivo</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip"
-                                            title="Descripción de a qué tipo de persona está dirigido el curso">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <input type="text" class="form-control form-control-lg form-control-solid"
-                                        name="public" placeholder="" value="f" required />
-                                </div>
-
-                                <div class="fv-row mb-10">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Slogan</span>
-                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                    title="Una breve frase o lema que represente su marca, producto o idea">
-                                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </span>
-                                            </label>
-                                            <input type="text" class="form-control form-control-lg form-control-solid"
-                                                name="slogan" placeholder="" value="f" />
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Nivel</span>
-                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                    title="Grado de habilidad o competencia">
-                                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </span>
-                                            </label>
-                                            <select name="level" required
-                                                class="form-control form-control-lg form-control-solid">
-                                                <option value="BASICO" select>BASICO</option>
-                                                <option value="INTERMEDIO">INTERMEDIO</option>
-                                                <option value="AVANZADO">AVANZADO</option>
-                                                <option value="EXPERTO">EXPERTO</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Tipo</span>
-                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                    title="Grado de habilidad o competencia">
-                                                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                    </i>
-                                                </span>
-                                            </label>
-                                            <select name="type" required
-                                                class="form-control form-control-lg form-control-solid">
-                                                <?php foreach ($programs_types as $types): ?>
-                                                <option value="<?php echo $types['ptid']; ?>">
-                                                    <?php echo $types['ptdescripcion']; ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="fv-row mb-10">
-                                    <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                        <span class="required">Resumen</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip"
-                                            title="Descripción del contenido del programa/curso">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <textarea name="resume" class="form-control form-control-lg form-control-solid"
-                                        placeholder="Descripción del contenido del programa/curso" value=""
-                                        required>f</textarea>
-                                </div>
-
-                                <div class="fv-row mb-10">
-                                    <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                        <span class="required">Requisitos</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip"
-                                            title="Descripción del equipo/marerial/programas necesarios para el curso">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <textarea name="requeriments" class="form-control form-control-lg form-control-solid"
-                                        placeholder="Descripción del equipo/marerial/programas necesarios para el curso" value=""
-                                        required>f</textarea>
-                                </div>
-                            </div>
-
-                            <div class="d-flex flex-stack pt-10">
-
-                                <div class="me-2">
-                                    <button type="button" class="btn btn-lg btn-light-primary me-3"
-                                        data-kt-stepper-action="previous">
-                                        <i class="ki-duotone ki-arrow-left fs-3 me-1">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i>Back</button>
-                                </div>
-                                <div>
-                                    <button type="sumbit" class="btn btn-lg btn-primary" data-kt-stepper-action="submit"
-                                        form="modal_update">
-                                        <span class="indicator-label">Submit
-                                            <i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i></span>
-                                        <span class="indicator-progress">Please wait...
-                                            <span
-                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                    <button type="button" class="btn btn-lg btn-primary"
-                                        data-kt-stepper-action="next">Continue
-                                        <i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i></button>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
     <?php include '../includes/footer.html' ?>
     <?php include '../includes/scripts.html' ?>
+    <form action="index.php" id="delete" method="POST">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="pid" value="0">
+    </form>
 </body>
 
 </html>
 <script>
-    const btnAbrirModal = document.querySelectorAll('.btn-abrir-modal');
-    const forms_update = $('.modal-body.modal_update');
-    btnAbrirModal.forEach(btn => {
+const btnAbrirModal = document.querySelectorAll('.btn-abrir-modal');
+const btnDeleteModal = document.querySelectorAll('.btn-delete-modal');
+
+const forms_update = $('.modal-body.modal_update');
+const forms_delete = $('#delete');
+
+btnAbrirModal.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const object = btn.getAttribute('data-to-form');
+        var json = JSON.parse(object);
+
+        forms_update.find('.form-control[name="name"]').val(json.pnombre);
+        forms_update.find('.form-control[name="shortname"]').val(json.pnombrecorto);
+        forms_update.find('.form-control[name="titlename"]').val(json.pnombrediploma);
+        forms_update.find('.form-control[name="public"]').val(json.pdirigidoa);
+        forms_update.find('.form-control[name="slogan"]').val(json.pslogan);
+        forms_update.find('.form-control[name="level"]').val(json.pnivel);
+        forms_update.find('.form-control[name="type"]').val(json.ptid);
+        forms_update.find('.form-control[name="resume"]').val(json.presumen);
+        forms_update.find('.form-control[name="requeriments"]').val(json.prequisitos);
+        forms_update.find('input[name="pid"]').val(json.pid);
+    });
+});
+
+btnDeleteModal.forEach(btn => {
         btn.addEventListener('click', () => {
-            const object = btn.getAttribute('data-to-form');
-            var json = JSON.parse(object);  
+            const id = btn.getAttribute('data-to-form');
+            forms_delete.find('input[name="pid"]').val(id);
 
-            forms_update.find('.form-control[name="name"]').val(json.pnombre);
-
+            Swal.fire({
+            title: "¿Esta seguro de dar de baja este elemento?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, eliminar"
+            }).then((result) => {
+                
+                if (result.isConfirmed) {            
+                    Swal.fire({
+                        title: "Elemento eliminado",
+                        icon: "success"
+                    });
+                    forms_delete.submit();
+                }
+                
+            });
         });
     });
+
 </script>

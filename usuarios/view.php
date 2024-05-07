@@ -4,27 +4,28 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla de Datos</title>
-    <?php include '../includes/head.html' ?>
+    <!-- ?php include '../includes/head.html' ?> -->
     <link href="../" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../src/MySrc/listas.css">
 
 </head>
 
-<body id="kt_body" class="header-extended header-fixed header-tablet-and-mobile-fixed">
-    <div>
+<body id="kt_body">
+<!-- class="header-extended header-fixed header-tablet-and-mobile-fixed" -->
+    <!-- <div>
         <ul class="d-flex justify-content-center">
             <li>1</li>
             <li>2</li>
             <li>3</li>
         </ul>
-    </div>
+    </div> -->
 
     <div class="container card my-4">
     <?php echo $table->render(); ?>
     </div>
+    <h4 class="bg-danger">F</h4>
     
-    
-    <?php include '../includes/footer.html' ?>
+    <!-- ?php include '../includes/footer.html' ?> -->
     
 </body>
 

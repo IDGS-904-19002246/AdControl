@@ -1,6 +1,7 @@
 <?php
+
 include '../includes/database.php';
-// echo "Error al actualizar el dato: " . $mysqli->error;
+
 class Model {
     public function select() {
         $mysqli = conectarDB();
@@ -175,12 +176,11 @@ class Model {
         $sql = "UPDATE programas SET pactivo = 0 WHERE pid = ".$_pid;
 
         if ($mysqli->query($sql) == 1) {
-            $mysqli->close();
-            return true;
+            echo "Dato actualizar correctamente.";
         } else {
-            $mysqli->close();
-            return false;
-        }
+            echo "Error al actualizar el dato: " . $mysqli->error;
+        }        
+        $mysqli->close();
     }
     // -----------------------------------------------------------------------------------
     public function selectTypes() {

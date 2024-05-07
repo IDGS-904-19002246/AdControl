@@ -71,8 +71,11 @@
 }
 .pdocrud-table-container .table tbody tr td {
     border-right: 1px solid #d5d5d5;
-    white-space: nowrap;
-    padding: 4px 10px;  
+    /* white-space: nowrap; */
+    padding: 4px 10px;
+    /* ---------------------------- */
+    max-width: 150px;
+    
 }
 .pdocrud-table-container table tr.pdocrud-header-row th{
     padding: 4px 10px;    
@@ -83,3 +86,5 @@
 .pdocrud-table tr:nth-child(odd), .pdocrud-table tr:nth-child(even) {
     background: #318085 !important;
 }
+
+

@@ -34,7 +34,10 @@ class Model {
             'ptdescripcion'
         ));
         $pdocrud->where("pactivo", "1","=");
+        $pdocrud->setSkin("green");
         $table = $pdocrud->dbTable("programas");
+
+        
         return $table;
     }
 

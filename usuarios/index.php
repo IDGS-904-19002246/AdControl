@@ -4,7 +4,11 @@ include 'model.php';
 require_once '../script/pdocrud.php';
 
 $model = new Model();
-$pdocrud = new PDOCrud(false, "pure", "pure");
+$pdocrud = new PDOCrud();
+
+
+
+// $table = $pdocrud->dbTable("programas");
 
 $table = $model->select();
 
