@@ -16,65 +16,6 @@
     <div class="tab-content container h-75" style="padding:0px !important;">
 
         <!-- VISTA DE CUADRICULA -->
-
-        <!-- <div class="card card-flush mt-6 mt-xl-9">
-            <div class="card-header mt-5">
-                <div class="card-toolbar my-1">
-                    <div class="d-flex align-items-center position-relative my-1">
-                        <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-3">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                        <input type="text" id="kt_filter_search"
-                            class="form-control form-control-solid form-select-sm w-150px ps-9"
-                            placeholder="Search Order" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-body pt-0">
-                <div class="table-responsive">
-                    <table id="kt_profile_overview_table"
-                        class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">
-                        <thead class="fs-7 text-gray-500 text-uppercase">
-                            <tr>
-                                <th class="min-w-250px">Manager</th>
-                                <th class="min-w-150px">Date</th>
-                                <th class="min-w-90px">Amount</th>
-                                <th class="min-w-90px">Status</th>
-                                <th class="min-w-50px text-end">Details</th>
-                            </tr>
-                        </thead>
-                        <tbody class="fs-6">
-                            <?php foreach ($data as $dato): ?>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-5 position-relative">
-                                            <div class="symbol symbol-35px symbol-circle">
-                                                <img alt="Pic" src="assets/media/avatars/300-6.jpg" />
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <a href="" class="fs-6 text-gray-800 text-hover-primary"><?php echo $dato['pnombre']; ?></a>
-                                            <div class="fw-semibold text-gray-500"><?php echo $dato['pnombre']; ?></div>
-                                        </div>
-                                    </div>
-                                    
-                                </td>
-                                <td>F</td>
-                                <td>F</td>
-                                <td>F</td>
-                                <td>F</td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div> -->
-
     </div>
 
     <hr>
@@ -176,7 +117,24 @@
 
 
     <?php include '../includes/footer.html' ?>
-    <?php include '../includes/scripts.html' ?>
+    <!-- ?php include '../includes/scripts.html' ?> -->
+    
+    <script src="../assets/plugins/global/plugins.bundle.js"></script>
+		<script src="../assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Vendors Javascript(used for this page only)-->
+		<script src="../assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		<!--end::Vendors Javascript-->
+		<!--begin::Custom Javascript(used for this page only)-->
+		<script src="../assets/js/custom/apps/projects/project/project.js"></script>
+		<script src="../assets/js/widgets.bundle.js"></script>
+		<script src="../assets/js/custom/widgets.js"></script>
+		<script src="../assets/js/custom/apps/chat/chat.js"></script>
+		<script src="../assets/js/custom/utilities/modals/upgrade-plan.js"></script>
+		<script src="../assets/js/custom/utilities/modals/create-campaign.js"></script>
+		<script src="../assets/js/custom/utilities/modals/create-app.js"></script>
+		<script src="../assets/js/custom/utilities/modals/users-search.js"></script>
+		<script src="../assets/js/custom/utilities/modals/new-target.js"></script>
 </body>
 
 </html>

@@ -186,7 +186,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center py-5">
-                        <button class="btn btn-lg btn-primary" form="kt_modal_create_app_form2" type="submit">
+                        <button class="btn btn-lg btn-primary" form="kt_modal_create_app_form2" type="button" id="update_button">
                             Guardar
                             <i class="ki-duotone ki-save-2"><span class="path1"></span><span class="path2"></span></i>
                         </button>

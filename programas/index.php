@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST["titlename"],
             $_POST["public"],
             $_POST["slogan"],
-            $_POST["level"],
+            ($_POST["level"] ?? ''),
             $_POST["type"],
             $_POST["resume"],
             $_POST["requeriments"],
