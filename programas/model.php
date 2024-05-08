@@ -57,7 +57,8 @@ class Model {
                 p.pdirigidoa,
                 p.pslogan,
                 p.pnivel,
-                p.prequisitos
+                p.prequisitos,
+                p.ptid
                 
             FROM programas p
             INNER JOIN programas_tipos pt ON pt.ptid = p.ptid

@@ -1,6 +1,6 @@
 <?php
 
-include '../includes/database.php';
+include '../../includes/database.php';
 
 class Model {
     public function select() {
@@ -8,28 +8,41 @@ class Model {
         if ($mysqli->connect_error) {
             die("Error de conexión: " . $mysqli->connect_error);
         }
-
         // $sql = "SELECT * FROM programas limit 10";
         $sql = "SELECT 
-                p.pid,
+                g.gid,
+                g.gciudad,
                 p.pnombre,
-                p.presumen,
-                p.pinversion,
-                pt.ptdescripcion,
-                p.phoras,
-
-                p.pnombrecorto,
-                p.pnombrediploma,
-                p.pdirigidoa,
-                p.pslogan,
-                p.pnivel,
-                p.prequisitos,
-                p.ptid
+                g.gpassword,
+                g.gcapacidad,
+                g.gfoto_grupo,
+                g.gintensivo,
                 
-            FROM programas p
-            INNER JOIN programas_tipos pt ON pt.ptid = p.ptid
-            where p.pactivo = 1
-            limit 13";
+                g.alumnospagados,
+                g.gsesiones,
+                g.gsesionesimpartidas,
+                g.ghrs_sesion,
+                
+                g.gf_inicio,
+                g.gf_inicio_publicidad,
+                g.gf_termino_publicidad,
+                g.gf_inicio_venta,
+                g.gf_inicio_cierre,
+                g.gf_termino,
+                
+                g.gprecio,
+                g.gpreciotarjeta,
+                g.gpreciocontado,
+                g.gpagoinicial,
+                g.gcuantospagos,
+                g.gmontopagos,
+                g.gpromocion
+
+            FROM grupos g
+            INNER JOIN programas p ON g.pid = p.pid
+            WHERE g.gf_inicio > CURDATE()
+            ORDER BY g.gf_inicio DesC
+            LIMIT 64";
 
         $result = $mysqli->query($sql);
 
@@ -46,24 +59,46 @@ class Model {
         $mysqli = conectarDB();
         if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
         $sql = "SELECT 
-                p.pid,
+                g.gid,
+                g.gciudad,
                 p.pnombre,
-                p.presumen,
-                p.pinversion,
-                pt.ptdescripcion,
-                p.phoras,
-
-                p.pnombrecorto,
-                p.pnombrediploma,
-                p.pdirigidoa,
-                p.pslogan,
-                p.pnivel,
-                p.prequisitos
+                g.gpassword,
+                g.gcapacidad,
+                g.gfoto_grupo,
+                g.gintensivo,
                 
-            FROM programas p
-            INNER JOIN programas_tipos pt ON pt.ptid = p.ptid
-            where p.pactivo = 1 AND
-            (p.pnombre LIKE '%".$name."%' OR p.pnombrecorto LIKE '%".$name."%' OR p.pnombrediploma LIKE '%".$name."%')";
+                g.alumnospagados,
+                g.gsesiones,
+                g.gsesionesimpartidas,
+                g.ghrs_sesion,
+                
+                g.gf_inicio,
+                g.gf_inicio_publicidad,
+                g.gf_termino_publicidad,
+                g.gf_inicio_venta,
+                g.gf_inicio_cierre,
+                g.gf_termino,
+                
+                g.gprecio,
+                g.gpreciotarjeta,
+                g.gpreciocontado,
+                g.gpagoinicial,
+                g.gcuantospagos,
+                g.gmontopagos,
+                g.gpromocion
+
+                FROM grupos g
+            INNER JOIN programas p ON g.pid = p.pid
+            WHERE g.gf_inicio > CURDATE() AND
+            (p.pnombre LIKE '%".$name."%' OR p.pnombrecorto LIKE '%".$name."%' OR p.pnombrediploma LIKE '%".$name."%')
+
+            ORDER BY g.gf_inicio DesC
+            LIMIT 64";
+                
+            // FROM programas p
+            // INNER JOIN programas_tipos pt ON pt.ptid = p.ptid
+            // where p.pactivo = 1 AND
+            // (p.pnombre LIKE '%".$name."%' OR p.pnombrecorto LIKE '%".$name."%' OR p.pnombrediploma LIKE '%".$name."%')
 
         $result = $mysqli->query($sql);
 
@@ -183,23 +218,15 @@ class Model {
         $mysqli->close();
     }
     // -----------------------------------------------------------------------------------
-    public function selectTypes() {
+    public function selectPrograms() {
         $mysqli = conectarDB();
-        if ($mysqli->connect_error) {
-            die("Error de conexión: " . $mysqli->connect_error);
-        }
+        if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
 
-        $sql = "SELECT *
-            FROM  programas_tipos pt
-            where pt.ptipoactivo = 1";
+        $sql = "SELECT p.pid, p.pnombre FROM programas p WHERE p.pactivo = 1;";
 
         $result = $mysqli->query($sql);
-
         $datos = array();
-        while ($row = $result->fetch_assoc()) {
-            $datos[] = $row;
-        }
-
+        while ($row = $result->fetch_assoc()) {$datos[] = $row;}
         $mysqli->close();
         return $datos;
     }

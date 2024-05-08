@@ -1,9 +1,9 @@
-<div class="modal fade" id="nuevo" tabindex="-1" aria-modal="true">
+<div class="modal fade" id="editar" tabindex="-1" aria-modal="true">
     <div class="modal-dialog modal-dialog-centered mw-900px">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h2>Nuevo Programa</h2>
+                <h2>Editar Programa</h2>
                 <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <i class="ki-duotone ki-cross fs-1">
                         <span class="path1"></span>
@@ -11,12 +11,12 @@
                     </i>
                 </div>
             </div>
-
+            
             <div class="modal-body py-lg-10 px-lg-10">
-                <form class="form" id="kt_modal_create_app_form3" method="POST" action="index.php">
-                    <input type="hidden" value="insert" onlyread name="action" />
-
-
+                <form class="form modal-body modal_update" id="kt_modal_create_app_form2" method="POST"
+                    action="index.php">
+                    <input type="hidden" value="update" onlyread name="action" />
+                    <input type="hidden" value="0" onlyread name="pid" />
                     <div class="row">
 
                         <div class="fv-row mb-10">
@@ -31,7 +31,7 @@
                                 </span>
                             </label>
                             <input type="text" class="form-control form-control-lg form-control-solid" name="name"
-                                placeholder="" value="" required />
+                                placeholder="" value="f" required />
                         </div>
 
                         <div class="fv-row mb-10">
@@ -49,7 +49,7 @@
                                         </span>
                                     </label>
                                     <input type="text" class="form-control form-control-lg form-control-solid"
-                                        name="shortname" placeholder="" value="" required />
+                                        name="shortname" placeholder="" value="f" required />
                                 </div>
 
                                 <div class="col-sm-6">
@@ -65,7 +65,7 @@
                                         </span>
                                     </label>
                                     <input type="text" class="form-control form-control-lg form-control-solid"
-                                        name="titlename" placeholder="" value="" required />
+                                        name="titlename" placeholder="" value="f" required />
                                 </div>
 
                             </div>
@@ -84,7 +84,7 @@
                                 </span>
                             </label>
                             <input type="text" class="form-control form-control-lg form-control-solid" name="public"
-                                placeholder="" value="" required />
+                                placeholder="" value="f" required />
                         </div>
 
                         <div class="fv-row mb-10">
@@ -102,7 +102,7 @@
                                         </span>
                                     </label>
                                     <input type="text" class="form-control form-control-lg form-control-solid"
-                                        name="slogan" placeholder="" value="" />
+                                        name="slogan" placeholder="" value="f" />
                                 </div>
 
                                 <div class="col-sm-3">
@@ -164,7 +164,7 @@
                             </label>
                             <textarea name="resume" class="form-control form-control-lg form-control-solid"
                                 placeholder="Descripción del contenido del programa/curso" value=""
-                                required></textarea>
+                                required>f</textarea>
                         </div>
 
                         <div class="fv-row mb-10">
@@ -181,12 +181,12 @@
                             </label>
                             <textarea name="requeriments" class="form-control form-control-lg form-control-solid"
                                 placeholder="Descripción del equipo/marerial/programas necesarios para el curso"
-                                value="" required></textarea>
+                                value="" required>f</textarea>
                         </div>
                     </div>
 
                     <div class="d-flex justify-content-center py-5">
-                        <button class="btn btn-lg btn-primary" form="kt_modal_create_app_form3" type="button" id="insert_button">
+                        <button class="btn btn-lg btn-primary" form="kt_modal_create_app_form2" type="button" id="update_button">
                             Guardar
                             <i class="ki-duotone ki-save-2"><span class="path1"></span><span class="path2"></span></i>
                         </button>
