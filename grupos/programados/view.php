@@ -196,7 +196,7 @@
 
     <hr>
     <?php include '../../includes/footer.html' ?>
-    <?php include 'modals/insert.php' ?>
+    
 <!-- ?php include '../../modals/grupos/insert.php' ?> -->
 
     <script src="../../assets/plugins/global/plugins.bundle.js"></script>
@@ -214,6 +214,11 @@
     <script src="../../assets/js/custom/utilities/modals/create-app.js"></script>
     <script src="../../assets/js/custom/utilities/modals/users-search.js"></script>
     <script src="../../assets/js/custom/utilities/modals/new-target.js"></script>
+    <?php include 'modals/insert.php' ?>
 </body>
 
 </html>
+<script>
+
+
+</script>
