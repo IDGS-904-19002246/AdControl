@@ -27,8 +27,8 @@
             </form>
 
             <div class="col-sm-6 d-flex justify-content-end align-items-center mt-1">
-                <button type="button" class="btn btn-primary mx-5" data-bs-toggle="modal" data-bs-target="#nuevo">Añadir
-                    Producto</button>
+                <button type="button" class="btn btn-primary mx-5" data-bs-toggle="modal" data-bs-target="#nuevo">Programar
+                    Grupo</button>
             </div>
         </div>
     </div>
@@ -173,14 +173,23 @@
                                                 data-bs-target="#editar" data-to-form=''>Editar</span>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <span class="menu-link px-3 btn-delete-modal" data-to-form=''>Dar de
-                                                baja</span>
+                                            <span class="menu-link px-3 btn-update-status"
+                                                status-to-form="1"
+                                                data-to-form='<?php echo $dato['gid']; ?>'>Abrir</span>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <span class="menu-link px-3 btn-update-status"
+                                                status-to-form="2"
+                                                data-to-form='<?php echo $dato['gid']; ?>'>Terminar</span>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <span class="menu-link px-3 btn-delete-modal"
+                                                data-to-form='<?php echo $dato['gid']; ?>'>Cancelar</span>
                                         </div>
                                     </div>
                                 </td>
 
                             </tr>
-
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -190,14 +199,18 @@
 
     </div>
 
-
-
-
-
+    <form action="index.php" id="delete" method="POST">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="id" value="0">
+    </form>
+    <form action="index.php" id="update_status" method="POST">
+        <input type="hidden" name="action" value="update_status">
+        <input type="hidden" name="status" value="0">
+        <input type="hidden" name="id" value="0">
+    </form>
     <hr>
     <?php include '../../includes/footer.html' ?>
     
-<!-- ?php include '../../modals/grupos/insert.php' ?> -->
 
     <script src="../../assets/plugins/global/plugins.bundle.js"></script>
     <script src="../../assets/js/scripts.bundle.js"></script>
@@ -214,11 +227,9 @@
     <script src="../../assets/js/custom/utilities/modals/create-app.js"></script>
     <script src="../../assets/js/custom/utilities/modals/users-search.js"></script>
     <script src="../../assets/js/custom/utilities/modals/new-target.js"></script>
+
     <?php include 'modals/insert.php' ?>
 </body>
 
 </html>
-<script>
-
-
-</script>
+<script src="../../src/MySrc/update.status.js"></script>

@@ -199,8 +199,8 @@
     </div>
     <hr>
 
-    <?php include '../modals/programas/insert.php' ?>
-    <?php include '../modals/programas/update.php' ?>
+    <?php include 'modals/insert.php' ?>
+    <?php include 'modals/update.php' ?>
     <?php include '../includes/footer.html' ?>
 
     <form action="index.php" id="delete" method="POST">

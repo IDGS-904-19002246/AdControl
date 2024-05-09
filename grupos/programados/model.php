@@ -40,7 +40,8 @@ class Model {
 
             FROM grupos g
             INNER JOIN programas p ON g.pid = p.pid
-            WHERE g.gf_inicio > CURDATE()
+            -- WHERE g.gf_inicio > CURDATE()
+            WHERE g.gstatus = 0
             ORDER BY g.gf_inicio DesC
             LIMIT 64";
 
@@ -111,46 +112,73 @@ class Model {
         return $datos;
     }
 
-    public function insert($name,$shortname,$titlename,$public,$slogan,$level,$type,$resume,$requeriments) {
+    public function insert(
+        // SECTION 1
+        $pid,
+        $gciudad,
+        $gsesiones,
+        $gcapacidad,
+        $gfoto_grupo,
+        $pass,
+        $hoid,$hohid,
+        $gintensivo,$grupoespecial,$gsweb,$gcertificacion,
+        // SECTION 2
+        $gf_inicio,$gf_termino,
+        $gf_inicio_publicidad,$gf_termino_publicidad,
+        $gf_inicio_venta,$gf_inicio_cierre,
+        //  SECTION 3
+        $gprecio,
+        $gpreciotarjeta,$gpreciocontado,
+        $gpagoinicial,$gcuantospagos,$gmontopagos
+    ) {
         $mysqli = conectarDB();
+        $sql = "INSERT INTO grupos(
+            -- SECTION 1
+            pid,
+            gciudad,
+            gsesiones,
+            gcapacidad,
+            gfoto_grupo,
+            gpassword,
 
-        $_pnombre = $mysqli->real_escape_string($name);
-        $_pnombrecorto = $mysqli->real_escape_string($shortname);
-        $_pnombrediploma = $mysqli->real_escape_string($titlename);
-        $_pdirigidoa = $mysqli->real_escape_string($public);
-        $_pslogan = $mysqli->real_escape_string($slogan);
-        $_pnivel = $mysqli->real_escape_string($level);
-        $_ptipo = $mysqli->real_escape_string($type);
-        $_presumen = $mysqli->real_escape_string($resume);
-        $_prequisitos = $mysqli->real_escape_string($requeriments);
-        
+            ghrs_sesion,
+            hoid,hohid,
+            gintensivo,grupoespecial,gsweb,gcertificacion,
+            -- SECTION 2
+            gf_inicio,gf_termino,
+            gf_inicio_publicidad,gf_termino_publicidad,
+            gf_inicio_venta,gf_inicio_cierre,
+            -- SECTION 3
+            gprecio,
+            gpreciotarjeta,gpreciocontado,
+            gpagoinicial,gcuantospagos,gmontopagos,
+            -- ---------------------------------
+            auid,gstatus,gpromocion)VALUES(
+                ".$pid.",
+                '".$gciudad."',
+                ".$gsesiones.",
+                ".$gcapacidad.",
+                '".$gfoto_grupo."',
+                '".$pass."',
+                (SELECT hohoras FROM grupos_horarios_horas WHERE hohid = ".$hohid."),
+                ".$hoid.",
+                ".$hohid.",
+                ".$gintensivo.",".$grupoespecial.",".$gsweb.",".$gcertificacion.",
+                
+                '".$gf_inicio."',
+                '".$gf_termino."',
+                '".$gf_inicio_publicidad."',
+                '".$gf_termino_publicidad."',
+                '".$gf_inicio_venta."',
+                '".$gf_inicio_cierre."',
 
-
-        $sql = "INSERT INTO programas (
-            `pnombre`,
-            `pnombrecorto`,
-            `pnombrediploma`,
-            `pdirigidoa`,
-            `pslogan`,
-            `pnivel`,
-            `ptid`,
-            `presumen`,
-            `prequisitos`,
-
-            `marca`,
-            `tematicas`
-            ) VALUES (
-
-            '".$_pnombre."',
-            '".$_pnombrecorto."',
-            '".$_pnombrediploma."',
-            '".$_pdirigidoa."',
-            '".$_pslogan."',
-            '".$_pnivel."',
-            ".$_ptipo.",
-            '".$_presumen."',
-            '".$_prequisitos."',
-            0,'-'
+                ".$gprecio.",
+                ".$gpreciotarjeta.",
+                ".$gpreciocontado.",
+                ".$gpagoinicial.",
+                ".$gcuantospagos.",
+                ".$gmontopagos.",
+                0,0,0
             )";
 
         if ($mysqli->query($sql) == 1) {
@@ -201,21 +229,20 @@ class Model {
         }        
     }
 
-    public function delete($pid){
+    public function delete($id){
         $mysqli = conectarDB();
         if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
+        $_id = $mysqli->real_escape_string($id);
 
-        $_pid = $mysqli->real_escape_string($pid);
-
-        // DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
-        $sql = "UPDATE programas SET pactivo = 0 WHERE pid = ".$_pid;
+        $sql = "UPDATE grupos SET gstatus = 3 WHERE gid = ".$_id;
 
         if ($mysqli->query($sql) == 1) {
-            echo "Dato actualizar correctamente.";
+            $mysqli->close();
+            return 1;
         } else {
-            echo "Error al actualizar el dato: " . $mysqli->error;
+            $mysqli->close();
+            return 0;
         }        
-        $mysqli->close();
     }
     // -----------------------------------------------------------------------------------
     public function selectPrograms() {
@@ -230,21 +257,59 @@ class Model {
         $mysqli->close();
         return $datos;
     }
-
-    public function selectById($id){
+    public function selectDays() {
         $mysqli = conectarDB();
         if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
-        $sql = "SELECT * FROM programas p WHERE p.pid =".$id;
+
+        $sql = "SELECT d.hoid, d.hodesc FROM grupos_horarios_dias d WHERE d.hoactivo = 1";
 
         $result = $mysqli->query($sql);
-
         $datos = array();
-        while ($row = $result->fetch_assoc()) {
-            $datos[] = $row;
-        }
-
+        while ($row = $result->fetch_assoc()) {$datos[] = $row;}
         $mysqli->close();
         return $datos;
     }
+    public function selectHours() {
+        $mysqli = conectarDB();
+        if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
+
+        $sql = "SELECT h.hohid,h.hohdesc,h.hohoras FROM grupos_horarios_horas h WHERE h.hohactivo = 1";
+
+        $result = $mysqli->query($sql);
+        $datos = array();
+        while ($row = $result->fetch_assoc()) {$datos[] = $row;}
+        $mysqli->close();
+        return $datos;
+    }
+    public function updateStatus($id,$status){
+        $mysqli = conectarDB();
+        if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
+        $_id = $mysqli->real_escape_string($id);
+
+        $sql = "UPDATE grupos SET gstatus = ".$status." WHERE gid = ".$_id;
+
+        if ($mysqli->query($sql) == 1) {
+            $mysqli->close();
+            return 1;
+        } else {
+            $mysqli->close();
+            return 0;
+        }        
+    }
+    // public function selectById($id){
+    //     $mysqli = conectarDB();
+    //     if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
+    //     $sql = "SELECT * FROM programas p WHERE p.pid =".$id;
+
+    //     $result = $mysqli->query($sql);
+
+    //     $datos = array();
+    //     while ($row = $result->fetch_assoc()) {
+    //         $datos[] = $row;
+    //     }
+
+    //     $mysqli->close();
+    //     return $datos;
+    // }
 }
 ?>
