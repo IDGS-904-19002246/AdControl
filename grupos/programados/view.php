@@ -20,14 +20,15 @@
                 <h3 class="fw-bold my-2">Administrador de Grupos Programados</h3>
 
                 <div class="d-flex justify-content-end">
-                    <input type="text" class="form-control form-control-sm form-control-solid" placeholder="Nombre a buscar . . ."
-                        name="nombre">
+                    <input type="text" class="form-control form-control-sm form-control-solid"
+                        placeholder="Nombre a buscar/id . . ." name="nombre">
                     <button form="buscador" type="submit" class="btn btn-primary mx-4">Buscar</button>
                 </div>
             </form>
 
             <div class="col-sm-6 d-flex justify-content-end align-items-center mt-1">
-                <button type="button" class="btn btn-primary mx-5" data-bs-toggle="modal" data-bs-target="#nuevo">Programar
+                <button type="button" class="btn btn-primary mx-5 btn-insert-modal" data-bs-toggle="modal"
+                    data-bs-target="#nuevo">Programar
                     Grupo</button>
             </div>
         </div>
@@ -70,10 +71,10 @@
                             <tr class="align-middle">
                                 <th class="min-w-200px">Nombre</th>
                                 <th class="text-center min-w-50px">Capacidad</th>
-                                <th class="text-center min-w-50px">Sesiones</th>
-                                <th class="text-center min-w-50px">Horas por sesion</th>
+                                <th class="text-center">Sesiones</th>
+                                <th class="text-center">Horas por sesion</th>
                                 <th class="text-center">Intensivo</th>
-                                <th class="text-center min-w-100px">Fechas</th>
+                                <th class="text-center min-w-150px">Fechas</th>
                                 <th class="text-center min-w-100px">Pagos</th>
                                 <th class="text-center min-w-100px">Acciones</th>
                             </tr>
@@ -93,7 +94,7 @@
                                         <div class="d-flex flex-column justify-content-center">
                                             <span
                                                 class="fs-6 text-gray-800 text-hover-primary"><?php echo $dato['pnombre']; ?>
-                                                
+
                                             </span>
                                             <div class="fw-semibold text-gray-500"><?php echo $dato['gciudad']; ?></div>
                                         </div>
@@ -111,7 +112,8 @@
                                     <?php echo $dato['ghrs_sesion']; ?> Hrs.
                                 </td>
                                 <td class="text-center">
-                                    <span class="badge badge-light fw-semibold me-auto"><?php echo ($dato['gintensivo'] == 1 ?'Sí':'No'); ?></span>
+                                    <span
+                                        class="badge badge-light fw-semibold me-auto"><?php echo ($dato['gintensivo'] == 1 ?'Sí':'No'); ?></span>
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-primary btn-sm btn-color-light-dark btn-active-light-primary"
@@ -142,22 +144,28 @@
                                     </button>
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-400px py-3"
                                         data-kt-menu="true">
-                                        
-                                        <div class="menu-item px-3"><span class="menu-link px-3">Precio: $<?php echo ($dato['gprecio'] ?? '0'); ?></span></div>
-                                        <div class="menu-item px-3"><span class="menu-link px-3">Precio con tarjeta: $<?php echo ($dato['gpreciotarjeta']??'0'); ?></span></div>
-                                        <div class="menu-item px-3"><span class="menu-link px-3">Precio al contado: $<?php echo ($dato['gpreciocontado']??'0'); ?></span></div>
+
+                                        <div class="menu-item px-3"><span class="menu-link px-3">Precio:
+                                                $<?php echo ($dato['gprecio'] ?? '0'); ?></span></div>
+                                        <div class="menu-item px-3"><span class="menu-link px-3">Precio con tarjeta:
+                                                $<?php echo ($dato['gpreciotarjeta']??'0'); ?></span></div>
+                                        <div class="menu-item px-3"><span class="menu-link px-3">Precio al contado:
+                                                $<?php echo ($dato['gpreciocontado']??'0'); ?></span></div>
                                         <?php if($dato['gcuantospagos'] != 0):?>
-                                            <hr>
-                                            <div class="menu-item px-3"><span class="menu-link px-3"><?php echo $dato['gcuantospagos']; ?> Pagos de $<?php echo $dato['gmontopagos']; ?></span></div>
-                                            <div class="menu-item px-3"><span class="menu-link px-3">Pago inicial: $<?php echo ($dato['gpagoinicial']??'0'); ?></span></div>
-                                        <?php endif ?>        
+                                        <hr>
+                                        <div class="menu-item px-3"><span
+                                                class="menu-link px-3"><?php echo $dato['gcuantospagos']; ?> Pagos de
+                                                $<?php echo $dato['gmontopagos']; ?></span></div>
+                                        <div class="menu-item px-3"><span class="menu-link px-3">Pago inicial:
+                                                $<?php echo ($dato['gpagoinicial']??'0'); ?></span></div>
+                                        <?php endif ?>
                                     </div>
                                 </td>
                                 <td class="text-end">
                                     <button
                                         class="btn btn-primary btn-sm btn-color-light-dark btn-active-light-primary float-end"
                                         data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                        
+
                                         <i class="ki-duotone ki-element-plus fs-2">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
@@ -169,23 +177,24 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px py-3"
                                         data-kt-menu="true">
                                         <div class="menu-item px-3">
-                                            <span class="menu-link px-3 btn-abrir-modal" data-bs-toggle="modal"
-                                                data-bs-target="#editar" data-to-form=''>Editar</span>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <span class="menu-link px-3 btn-update-status"
-                                                status-to-form="1"
-                                                data-to-form='<?php echo $dato['gid']; ?>'>Abrir</span>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <span class="menu-link px-3 btn-update-status"
-                                                status-to-form="2"
-                                                data-to-form='<?php echo $dato['gid']; ?>'>Terminar</span>
+                                            <span class="menu-link px-3 btn-update-modal" data-bs-toggle="modal"
+                                                data-bs-target="#nuevo"
+                                                data-to-form='<?php echo json_encode($dato); ?>'>Editar</span>
                                         </div>
                                         <div class="menu-item px-3">
                                             <span class="menu-link px-3 btn-delete-modal"
                                                 data-to-form='<?php echo $dato['gid']; ?>'>Cancelar</span>
                                         </div>
+                                        <hr>
+                                        <div class="menu-item px-3">
+                                            <span class="menu-link px-3 btn-update-status" status-to-form="1"
+                                                data-to-form='<?php echo $dato['gid']; ?>'>Abrir</span>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <span class="menu-link px-3 btn-update-status" status-to-form="2"
+                                                data-to-form='<?php echo $dato['gid']; ?>'>Terminar</span>
+                                        </div>
+
                                     </div>
                                 </td>
 
@@ -210,7 +219,7 @@
     </form>
     <hr>
     <?php include '../../includes/footer.html' ?>
-    
+
 
     <script src="../../assets/plugins/global/plugins.bundle.js"></script>
     <script src="../../assets/js/scripts.bundle.js"></script>
@@ -229,7 +238,22 @@
     <script src="../../assets/js/custom/utilities/modals/new-target.js"></script>
 
     <?php include 'modals/insert.php' ?>
+    <!-- ?php include 'modals/update.php' ?> -->
 </body>
 
 </html>
 <script src="../../src/MySrc/update.status.js"></script>
+<script>
+const btnInsertModal = $('.btn-insert-modal')[0];
+btnInsertModal.addEventListener('click', () => {
+    start_form();
+});
+const btnUpdateModal = document.querySelectorAll('.btn-update-modal');
+btnUpdateModal.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const object = btn.getAttribute('data-to-form');
+        var json = JSON.parse(object);
+        inputData(json);
+    });
+});
+</script>

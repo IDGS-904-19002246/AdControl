@@ -5,18 +5,18 @@ include '../../includes/database.php';
 class Model {
     public function select() {
         $mysqli = conectarDB();
-        if ($mysqli->connect_error) {
-            die("Error de conexión: " . $mysqli->connect_error);
-        }
+        if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
         // $sql = "SELECT * FROM programas limit 10";
         $sql = "SELECT 
                 g.gid,
+                p.pid,
                 g.gciudad,
                 p.pnombre,
                 g.gpassword,
                 g.gcapacidad,
                 g.gfoto_grupo,
-                g.gintensivo,
+                g.hoid,g.hohid,
+                g.gintensivo,g.grupoespecial,g.gsweb,g.gcertificacion,
                 
                 g.alumnospagados,
                 g.gsesiones,
@@ -61,12 +61,14 @@ class Model {
         if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
         $sql = "SELECT 
                 g.gid,
+                p.pid,
                 g.gciudad,
                 p.pnombre,
                 g.gpassword,
                 g.gcapacidad,
                 g.gfoto_grupo,
-                g.gintensivo,
+                g.hoid,g.hohid,
+                g.gintensivo,g.grupoespecial,g.gsweb,g.gcertificacion,
                 
                 g.alumnospagados,
                 g.gsesiones,
@@ -90,16 +92,12 @@ class Model {
 
                 FROM grupos g
             INNER JOIN programas p ON g.pid = p.pid
-            WHERE g.gf_inicio > CURDATE() AND
-            (p.pnombre LIKE '%".$name."%' OR p.pnombrecorto LIKE '%".$name."%' OR p.pnombrediploma LIKE '%".$name."%')
+            WHERE g.gstatus = 0 AND
+            (p.pnombre LIKE '%".$name."%' OR p.pnombrecorto LIKE '%".$name."%' OR p.pnombrediploma LIKE '%".$name."%') OR
+            g.gid = ".$name."
 
             ORDER BY g.gf_inicio DesC
             LIMIT 64";
-                
-            // FROM programas p
-            // INNER JOIN programas_tipos pt ON pt.ptid = p.ptid
-            // where p.pactivo = 1 AND
-            // (p.pnombre LIKE '%".$name."%' OR p.pnombrecorto LIKE '%".$name."%' OR p.pnombrediploma LIKE '%".$name."%')
 
         $result = $mysqli->query($sql);
 
@@ -145,9 +143,12 @@ class Model {
             hoid,hohid,
             gintensivo,grupoespecial,gsweb,gcertificacion,
             -- SECTION 2
-            gf_inicio,gf_termino,
-            gf_inicio_publicidad,gf_termino_publicidad,
-            gf_inicio_venta,gf_inicio_cierre,
+            gf_inicio,
+            gf_termino,
+            gf_inicio_publicidad,
+            gf_termino_publicidad,
+            gf_inicio_venta,
+            gf_inicio_cierre,
             -- SECTION 3
             gprecio,
             gpreciotarjeta,gpreciocontado,
@@ -189,36 +190,55 @@ class Model {
             return false;
         }    
     }
-
-
-    public function update($name,$shortname,$titlename,$public,$slogan,$level,$type,$resume,$requeriments,$pid){
+    public function update(
+        // SECTION 1
+        $pid,
+        $gciudad,
+        $gsesiones,
+        $gcapacidad,
+        // $gfoto_grupo,
+        $pass,
+        $hoid,$hohid,
+        $gintensivo,$grupoespecial,$gsweb,$gcertificacion,
+        // SECTION 2
+        $gf_inicio,$gf_termino,
+        $gf_inicio_publicidad,$gf_termino_publicidad,
+        $gf_inicio_venta,$gf_inicio_cierre,
+        //  SECTION 3
+        $gprecio,
+        $gpreciotarjeta,$gpreciocontado,
+        $gpagoinicial,$gcuantospagos,$gmontopagos,
+        $gid
+    ){
         $mysqli = conectarDB();
         if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
 
-        $_pnombre = $mysqli->real_escape_string($name);
-        $_pnombrecorto = $mysqli->real_escape_string($shortname);
-        $_pnombrediploma = $mysqli->real_escape_string($titlename);
-        $_pdirigidoa = $mysqli->real_escape_string($public);
-        $_pslogan = $mysqli->real_escape_string($slogan);
-        $_pnivel = $mysqli->real_escape_string($level);
-        $_ptipo = $mysqli->real_escape_string($type);
-        $_presumen = $mysqli->real_escape_string($resume);
-        $_prequisitos = $mysqli->real_escape_string($requeriments);
-        $_pid = $mysqli->real_escape_string($pid);
+        $sql = "UPDATE grupos SET
+                -- SECTION 1
+                pid = ".$pid.",
+                gciudad = '".$gciudad."',
+                gsesiones = ".$gsesiones.",
+                gcapacidad = ".$gcapacidad.",
+                gpassword='".$pass."',
+                ghrs_sesion=(SELECT hohoras FROM grupos_horarios_horas WHERE hohid = ".$hohid."),
+                hoid=".$hoid.",hohid=".$hohid.",
+                gintensivo=".$gintensivo.",grupoespecial=".$grupoespecial.",gsweb=".$gsweb.",gcertificacion=".$gcertificacion.",
 
+                gf_inicio='".$gf_inicio."',
+                gf_termino='".$gf_termino."',
+                gf_inicio_publicidad='".$gf_inicio_publicidad."',
+                gf_termino_publicidad='".$gf_termino_publicidad."',
+                gf_inicio_venta='".$gf_inicio_venta."',
+                gf_inicio_cierre='".$gf_inicio_cierre."',
 
-        $sql = "UPDATE programas SET
-                pnombre ='".$_pnombre."',
-                pnombrecorto ='".$_pnombrecorto."',
-                pnombrediploma ='".$_pnombrediploma."',
-                pdirigidoa ='".$_pdirigidoa."',
-                pslogan ='".$_pslogan."',
-                pnivel ='".$_pnivel."',
-                ptid =".$_ptipo.",
-                presumen ='".$_presumen."',
-                prequisitos ='".$_prequisitos."'
+                gprecio=".$gprecio.",
+                gpreciotarjeta=".$gpreciotarjeta.",
+                gpreciocontado=".$gpreciocontado.",
+                gpagoinicial=".$gpagoinicial.",
+                gcuantospagos=".$gcuantospagos.",
+                gmontopagos=".$gmontopagos."
 
-            WHERE pid = ".$_pid;
+            WHERE gid = ".$gid;
 
         if ($mysqli->query($sql) == 1) {
             $mysqli->close();
@@ -228,7 +248,6 @@ class Model {
             return false;
         }        
     }
-
     public function delete($id){
         $mysqli = conectarDB();
         if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
@@ -296,20 +315,20 @@ class Model {
             return 0;
         }        
     }
-    // public function selectById($id){
-    //     $mysqli = conectarDB();
-    //     if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
-    //     $sql = "SELECT * FROM programas p WHERE p.pid =".$id;
+    public function updateImage($id,$img){
+        $mysqli = conectarDB();
+        if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
 
-    //     $result = $mysqli->query($sql);
+        $sql = "UPDATE grupos SET gfoto_grupo = '".$img."' WHERE gid = ".$id;
 
-    //     $datos = array();
-    //     while ($row = $result->fetch_assoc()) {
-    //         $datos[] = $row;
-    //     }
-
-    //     $mysqli->close();
-    //     return $datos;
-    // }
+        if ($mysqli->query($sql) == 1) {
+            $mysqli->close();
+            return 1;
+        } else {
+            $mysqli->close();
+            return 0;
+        }        
+    }
+    
 }
 ?>

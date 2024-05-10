@@ -15,7 +15,7 @@
             <div class="modal-body py-lg-10 px-lg-10">
                 <form class="form" id="insert" method="POST" action="index.php" enctype="multipart/form-data">
                     <input type="hidden" value="insert" onlyread name="action" />
-
+                    <input type="hidden" name="id" value="0">
 
                     <div class="row">
 
@@ -73,30 +73,34 @@
                                         <?php endforeach; ?>
                                     </select>
                                     <div class="row p-2">
-                                        <label class="col-sm-3 d-flex align-items-center fs-5 fw-semibold mb-2" for="intensive">
+                                        <label class="col-sm-3 d-flex align-items-center fs-5 fw-semibold mb-2"
+                                            for="intensive">
                                             <input type="checkbox" name="intensive" class="mx-2">
                                             Es intensivo
                                         </label>
-                                        <label class="col-sm-3 d-flex align-items-center fs-5 fw-semibold mb-2" for="special">
+                                        <label class="col-sm-3 d-flex align-items-center fs-5 fw-semibold mb-2"
+                                            for="special">
                                             <input type="checkbox" name="special" class="mx-2">
                                             Es Especial
                                         </label>
-                                        <label class="col-sm-3 d-flex align-items-center fs-5 fw-semibold mb-2" for="certification">
+                                        <label class="col-sm-3 d-flex align-items-center fs-5 fw-semibold mb-2"
+                                            for="certification">
                                             <input type="checkbox" name="certification" class="mx-2">
                                             Lleva certificación
                                         </label>
-                                        <label class="col-sm-3 d-flex align-items-center fs-5 fw-semibold mb-2" for="web">
+                                        <label class="col-sm-3 d-flex align-items-center fs-5 fw-semibold mb-2"
+                                            for="web">
                                             <input type="checkbox" name="web" class="mx-2">
                                             Ver en web
                                         </label>
                                     </div>
                                 </div>
                                 <div class="fv-row mb-10">
-                                <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                                <span class="required">Contraseña (opcional)</span>
-                                            </label>
-                                            <input type="password" class="form-control form-control-lg form-control-solid"
-                                                name="pass" />
+                                    <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
+                                        <span class="required">Contraseña (opcional)</span>
+                                    </label>
+                                    <input type="password" class="form-control form-control-lg form-control-solid"
+                                        name="pass" />
                                 </div>
                                 <div class="fv-row mb-10">
                                     <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
@@ -164,7 +168,8 @@
                                             <select name="hohid" required
                                                 class="form-control form-control-lg form-control-solid">
                                                 <?php foreach ($hours as $h): ?>
-                                                <option value="<?php echo $h['hohid']; ?>"><?php echo ($h['hohdesc'].' ('.$h['hohoras'].') Hrs'); ?>
+                                                <option value="<?php echo $h['hohid']; ?>">
+                                                    <?php echo ($h['hohdesc'].' ('.$h['hohoras'].') Hrs'); ?>
                                                 </option>
                                                 <?php endforeach; ?>
                                             </select>
@@ -409,6 +414,23 @@
     </div>
 </div>
 <script>
+function start_form() {
+    const forms = $('#insert');
+    forms[0].reset();
+    forms.find('.image-input-wrapper').css('background-image','');    
+    forms.find('input[name="action"]').val('insert');
+    forms.find('input[name="id"]').val(0);
+    forms.find('input[type="checkbox"]').attr("checked", false);
+
+    $('#section_form1').show();
+    $('#section_form2').hide();
+    $('#section_form3').hide();
+    section_icon.removeClass('bg-primary').addClass('bg-light-primary').removeClass('text-light').addClass(
+        'text-primary');
+    section_icon1.removeClass('bg-light-primary').addClass('bg-primary').removeClass('text-primary').addClass(
+        'text-light');
+}
+
 function validator_1() {
     if (
         section_form1.find('input[name="n_sessions"]').val() != '' &&
@@ -461,6 +483,50 @@ function validator_3() {
 
 function sumbit() {
     insert.submit();
+}
+
+function inputData(json) {
+    start_form();
+    const form = $('#insert');
+    form.find('input[name="action"]').val('update');
+
+    form.find('input[name="id"]').val(json.gid);
+    form.find('.form-control[name="program"]').val(json.pid);
+    form.find('input[name="intensive"]').attr("checked", (json.gintensivo==1?true:false));
+    form.find('input[name="special"]').attr("checked", (json.grupoespecial==1?true:false));
+    form.find('input[name="certification"]').attr("checked", (json.gcertificacion==1?true:false));
+    form.find('input[name="web"]').attr("checked", (json.gsweb==1?true:false));
+    form.find('.form-control[name="pass"]').val((json.gpassword ?? ''));
+    form.find('.form-control[name="city"]').val(json.gciudad);
+    form.find('.form-control[name="n_sessions"]').val(json.gsesiones);
+    form.find('.form-control[name="capacity"]').val(json.gcapacidad);
+    form.find('.form-control[name="hoid"]').val(json.hoid);
+    form.find('.form-control[name="hohid"]').val(json.hohid);
+    if (json.gfoto_grupo != '') {
+        form.find('.image-input-wrapper').css('background-image',`url(../../assets/img/gfoto_grupo/${json.gfoto_grupo})`);    
+        console.log(json.gfoto_grupo);
+    }
+    form.find('.form-control[name="date_start"]').val(json.gf_inicio);
+    form.find('.form-control[name="date_end"]').val(json.gf_termino);
+    form.find('.form-control[name="date_start_advertising"]').val(json.gf_inicio_publicidad);
+    form.find('.form-control[name="date_end_advertising"]').val(json.gf_termino_publicidad);
+    form.find('.form-control[name="date_start_2"]').val(json.gf_inicio_venta);
+    form.find('.form-control[name="date_end_2"]').val(json.gf_inicio_cierre);
+    form.find('.form-control[name="price"]').val(json.gprecio);
+    form.find('.form-control[name="price_card"]').val(json.gpreciotarjeta);
+    form.find('.form-control[name="price_spot"]').val(json.gpreciocontado);
+    form.find('.form-control[name="n_pays0"]').val(json.gpagoinicial);
+
+    // forms_update.find('.form-control[name="pays"]').val(json.pnombre);
+    if (json.gcuantospagos == 0 || json.gmontopagos == 0) {
+        form.find('.form-control[name="n_pays"]').val('');
+        form.find('.form-control[name="n_price"]').val('');
+        form.find('.form-control[name="pays"]').val(false);
+    } else {
+        form.find('.form-control[name="n_pays"]').val(json.gcuantospagos);
+        form.find('.form-control[name="n_price"]').val(json.gmontopagos);
+        form.find('.form-control[name="pays"]').val(true);
+    }
 }
 </script>
 <script src="../../src/MySrc/modal.section.js"></script>
