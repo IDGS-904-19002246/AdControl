@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST["requeriments"],
             $_POST["certification"],
         );
+        $data = $model->select();
     }
     if ($_POST["action"] == 'update') {
         $ok = $model->update(
@@ -45,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST["certification"],
             $_POST["pid"]
         );
+        $data = $model->select();
     }
     if ($_POST["action"] == 'delete') {
         $ok = $model->delete($_POST["pid"]);

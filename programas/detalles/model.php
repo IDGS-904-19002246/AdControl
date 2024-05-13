@@ -4,10 +4,11 @@ include '../../includes/database.php';
 class Model {
     public function insert($name,$desc,$fk_id){
         $mysqli = conectarDB();
-        if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
+        if ($mysqli->connect_error) {
+            die("Error de conexión: " . $mysqli->connect_error);}
 
         $sql = "INSERT INTO programas_secciones
-            (fk_id_programas, nombre, descripcion)
+            (fk_id_programa, nombre, descripcion)
             VALUES (".$fk_id.",'".$name."','".$desc."')";
 
         if ($mysqli->query($sql) == 1) {
@@ -113,7 +114,7 @@ class Model {
                 (
                     SELECT JSON_ARRAYAGG(
                         JSON_OBJECT('id',ps.id,'name',ps.nombre,'desc',ps.descripcion)
-                    )FROM programas_secciones ps WHERE ps.fk_id_programas = p.pid
+                    )FROM programas_secciones ps WHERE ps.fk_id_programa = p.pid
                 ) AS 'section'
 
         FROM programas p WHERE p.pid =".$id;
