@@ -23,7 +23,8 @@ class Model {
                 p.pslogan,
                 p.pnivel,
                 p.prequisitos,
-                p.ptid
+                p.ptid,
+                p.pcertificacion
                 
             FROM programas p
             INNER JOIN programas_tipos pt ON pt.ptid = p.ptid
@@ -58,7 +59,8 @@ class Model {
                 p.pslogan,
                 p.pnivel,
                 p.prequisitos,
-                p.ptid
+                p.ptid,
+                p.pcertificacion
                 
             FROM programas p
             INNER JOIN programas_tipos pt ON pt.ptid = p.ptid
@@ -76,7 +78,7 @@ class Model {
         return $datos;
     }
 
-    public function insert($name,$shortname,$titlename,$public,$slogan,$level,$type,$resume,$requeriments) {
+    public function insert($name,$shortname,$titlename,$public,$slogan,$level,$type,$resume,$requeriments,$certification) {
         $mysqli = conectarDB();
 
         $_pnombre = $mysqli->real_escape_string($name);
@@ -88,7 +90,7 @@ class Model {
         $_ptipo = $mysqli->real_escape_string($type);
         $_presumen = $mysqli->real_escape_string($resume);
         $_prequisitos = $mysqli->real_escape_string($requeriments);
-        
+        $_certification = $mysqli->real_escape_string($certification);
 
 
         $sql = "INSERT INTO programas (
@@ -96,11 +98,13 @@ class Model {
             `pnombrecorto`,
             `pnombrediploma`,
             `pdirigidoa`,
+
             `pslogan`,
             `pnivel`,
             `ptid`,
             `presumen`,
             `prequisitos`,
+            `pcertificacion`,
 
             `marca`,
             `tematicas`
@@ -110,11 +114,14 @@ class Model {
             '".$_pnombrecorto."',
             '".$_pnombrediploma."',
             '".$_pdirigidoa."',
+
             '".$_pslogan."',
             '".$_pnivel."',
             ".$_ptipo.",
             '".$_presumen."',
             '".$_prequisitos."',
+            ".$_certification.",
+
             0,'-'
             )";
 
@@ -128,7 +135,7 @@ class Model {
     }
 
 
-    public function update($name,$shortname,$titlename,$public,$slogan,$level,$type,$resume,$requeriments,$pid){
+    public function update($name,$shortname,$titlename,$public,$slogan,$level,$type,$resume,$requeriments,$certification,$pid){
         $mysqli = conectarDB();
         if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
 
@@ -142,7 +149,7 @@ class Model {
         $_presumen = $mysqli->real_escape_string($resume);
         $_prequisitos = $mysqli->real_escape_string($requeriments);
         $_pid = $mysqli->real_escape_string($pid);
-
+        $_certification= $mysqli->real_escape_string($certification);
 
         $sql = "UPDATE programas SET
                 pnombre ='".$_pnombre."',
@@ -153,7 +160,8 @@ class Model {
                 pnivel ='".$_pnivel."',
                 ptid =".$_ptipo.",
                 presumen ='".$_presumen."',
-                prequisitos ='".$_prequisitos."'
+                prequisitos ='".$_prequisitos."',
+                pcertificacion = ".$_certification."
 
             WHERE pid = ".$_pid;
 
@@ -193,6 +201,28 @@ class Model {
         $sql = "SELECT *
             FROM  programas_tipos pt
             where pt.ptipoactivo = 1";
+
+        $result = $mysqli->query($sql);
+
+        $datos = array();
+        while ($row = $result->fetch_assoc()) {
+            $datos[] = $row;
+        }
+
+        $mysqli->close();
+        return $datos;
+    }
+
+    public function selectCertification() {
+        $mysqli = conectarDB();
+        if ($mysqli->connect_error) {
+            die("Error de conexión: " . $mysqli->connect_error);
+        }
+
+        $sql = "SELECT
+                pc.id,
+                CONCAT(pc.marca, ' - ',pc.examen) 'name'
+            FROM programas_certificaciones pc;";
 
         $result = $mysqli->query($sql);
 

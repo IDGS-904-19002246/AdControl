@@ -2,10 +2,32 @@
 include 'model.php';
 $model = new Model();
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_POST["action"] == 'insert') {
+        $ok = $model->insert(
+            $_POST["name"],
+            $_POST["desc"],
+            $_GET['id']
+        );
+    }
+    if ($_POST["action"] == 'update') {
+        $ok = $model->update(
+            $_POST["name"],
+            $_POST["desc"],
+            $_POST['id']
+        );
+    }
+    if ($_POST["action"] == 'delete') {
+        $ok = $model->delete($_POST["id"]);
+    }
+    header('Location:/../programas/detalles/index.php?id='.$_GET['id']);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET['id'])) {
-        // $data = $model->select();
-        echo $_GET['id'];
+        $data = $model->selectById($_GET['id']);
+        $programs_types = $model->selectTypes();
+        $programs_certification = $model->selectCertification();
     }else {
         header('Location:/../programas/');
     }

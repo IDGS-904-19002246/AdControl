@@ -73,6 +73,20 @@
 
                         <div class="fv-row mb-10">
                             <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
+                                <span class="required">Certificación</span>
+                            </label>
+                            <select name="certification" required
+                                class="form-control form-control-lg form-control-solid">
+                                <?php foreach ($programs_certification as $pc): ?>
+                                    <option value="<?php echo $pc['id']; ?>">
+                                        <?php echo $pc['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="fv-row mb-10">
+                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
                                 <span class="required">Público objetivo</span>
                                 <span class="ms-1" data-bs-toggle="tooltip"
                                     title="Descripción de a qué tipo de persona está dirigido el curso">

@@ -5,6 +5,7 @@ include 'model.php';
 $model = new Model();
 $data = $model->select();
 $programs_types = $model->selectTypes();
+$programs_certification = $model->selectCertification();
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,7 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $_POST["type"],
             $_POST["resume"],
-            $_POST["requeriments"]
+            
+            $_POST["requeriments"],
+            $_POST["certification"],
         );
     }
     if ($_POST["action"] == 'update') {
@@ -37,7 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ($_POST["level"] ?? ''),
             $_POST["type"],
             $_POST["resume"],
+            
             $_POST["requeriments"],
+            $_POST["certification"],
             $_POST["pid"]
         );
     }

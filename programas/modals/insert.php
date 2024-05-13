@@ -73,6 +73,21 @@
 
                         <div class="fv-row mb-10">
                             <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
+                                <span class="required">Certificación</span>
+                            </label>
+                            <select name="certification" required
+                                class="form-control form-control-lg form-control-solid">
+                                <?php foreach ($programs_certification as $pc): ?>
+                                    <option value="<?php echo $pc['id']; ?>">
+                                        <?php echo $pc['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+
+                        <div class="fv-row mb-10">
+                            <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
                                 <span class="required">Público objetivo</span>
                                 <span class="ms-1" data-bs-toggle="tooltip"
                                     title="Descripción de a qué tipo de persona está dirigido el curso">
@@ -141,8 +156,9 @@
                                     <select name="type" required
                                         class="form-control form-control-lg form-control-solid">
                                         <?php foreach ($programs_types as $types): ?>
-                                        <option value="<?php echo $types['ptid']; ?>">
-                                            <?php echo $types['ptdescripcion']; ?></option>
+                                            <option value="<?php echo $types['ptid']; ?>">
+                                                <?php echo $types['ptdescripcion']; ?>
+                                            </option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -163,8 +179,7 @@
                                 </span>
                             </label>
                             <textarea name="resume" class="form-control form-control-lg form-control-solid"
-                                placeholder="Descripción del contenido del programa/curso" value=""
-                                required></textarea>
+                                placeholder="Descripción del contenido del programa/curso" value="" required></textarea>
                         </div>
 
                         <div class="fv-row mb-10">
@@ -186,7 +201,8 @@
                     </div>
 
                     <div class="d-flex justify-content-center py-5">
-                        <button class="btn btn-lg btn-primary" form="kt_modal_create_app_form3" type="button" id="insert_button">
+                        <button class="btn btn-lg btn-primary" form="kt_modal_create_app_form3" type="button"
+                            id="insert_button">
                             Guardar
                             <i class="ki-duotone ki-save-2"><span class="path1"></span><span class="path2"></span></i>
                         </button>

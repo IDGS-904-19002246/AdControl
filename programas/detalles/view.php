@@ -13,62 +13,118 @@
 <body id="kt_body" class="header-extended header-fixed header-tablet-and-mobile-fixed">
     <?php include '../../includes/navbar.html'; ?>
 
-    <!-- BUSCADOR -->
     <div class="container card my-4">
-        <div class="row d-flex justify-content-between align-items-center py-3 py-lg-6">
-            <form id="buscador" method="post" action="index.php" class="col-sm-6 my-0 d-flex justify-content-end"
-                data-select2-id="select2-data-146-sh2u">
-                <input type="hidden" value="search" onlyread name="action">
-                <h3 class="fw-bold my-2">Productos </h3>
-                <input type="text" class="form-control form-control-sm form-control-solid mx-2"
-                    placeholder="Nombre a buscar . . ." name="nombre">
-                <button form="buscador" type="submit" class="btn btn-primary me-5">Buscar</button>
-            </form>
-
-            <div class="col-sm-6 d-flex justify-content-end align-items-center">
-                <ul class="nav nav-pills me-5" role="tablist">
-                    <li class="nav-item m-0" role="presentation">
-                        <a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary me-3 active"
-                            data-bs-toggle="tab" href="#kt_project_targets_table_pane" aria-selected="true" role="tab">
-                            <i class="ki-duotone ki-element-plus fs-1">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                                <span class="path4"></span>
-                                <span class="path5"></span>
-                            </i>
-                        </a>
-                    </li>
-                    <li class="nav-item m-0" role="presentation">
-                        <a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary" data-bs-toggle="tab"
-                            href="#kt_project_targets_card_pane" aria-selected="false" role="tab" tabindex="-1">
-                            <i class="ki-duotone ki-row-horizontal fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i>
-                        </a>
-                    </li>
-                </ul>
-
-                <button type="button" class="btn btn-primary mx-5" data-bs-toggle="modal" data-bs-target="#nuevo">Añadir
-                    Producto</button>
+        <?php foreach ($data as $dato): ?>
+            <div class="row">
+                <div class="col-sm-10">
+                    <h1 class="fw-bold pt-4"><?php echo $dato['pnombre']; ?></h1>
+                    <h4 class="fw-bold d-flex align-items-center">
+                        <?php echo $dato['pnombrediploma']; ?> -
+                        <?php echo $dato['pslogan']; ?>
+                    </h4>
+                </div>
+                <div class="col-sm-2">
+                    <div class="d-flex align-items-end p-4">
+                        <span class="badge badge-light fw-semibold me-auto">
+                            <?php echo $dato['phoras']; ?> Hrs.
+                        </span>
+                        <span class="badge badge-light fw-semibold me-auto">
+                            <?php echo ($dato['pnivel'] != '' ? $dato['pnivel'] : 'BASICO'); ?>
+                        </span>
+                    </div>
+                </div>
             </div>
 
+            <hr>
+            <h2 class="fw-bold pt-4">Publico objetivo</h2>
+            <span class="fs-6 text-gray-800 text-hover-primary"><?php echo $dato['pdirigidoa']; ?></span>
+            <hr>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2 class="fw-bold pt-4">Resumen</h2>
+                    <span class="fs-6 text-gray-800 text-hover-primary"><?php echo $dato['presumen']; ?></span>
+                </div>
+                <div class="col-sm-6">
+                    <h2 class="fw-bold pt-4">Requisitos</h2>
+                    <span class="fs-6 text-gray-800 text-hover-primary"><?php echo $dato['prequisitos']; ?></span>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-2">
+                    <label class="d-flex align-items-center fs-5 fw-semibold">
+                        <span class="required">Tipo</span>
+                    </label>
+                    <select name="types" disabled class="form-control form-control-lg form-control-solid">
+                        <?php foreach ($programs_types as $t): ?>
+                            <option value="<?php echo $t['ptid']; ?>" <?php if ($t['ptid'] == $dato['ptid'])
+                                   echo 'selected'; ?>>
+                                <?php echo $t['ptdescripcion']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label class="d-flex align-items-center fs-5 fw-semibold">
+                        <span class="required">Certificación</span>
+                    </label>
+                    <select name="certification" disabled class="form-control form-control-lg form-control-solid">
+                        <?php foreach ($programs_certification as $pc): ?>
+                            <option value="<?php echo $pc['id']; ?>">
+                                <?php echo $pc['name']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="row d-flex align-items-center">
+                <div class="col-sm-8">
+                    <h4 class="fw-bold py-2">Secciones</h4>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-sm btn-primary btn-insert-modal" data-bs-toggle="modal"
+                        data-bs-target="#nuevo">Añadir
+                        Sección</button>
+                </div>
+            </div>
+            <div class="table-responsive">
 
-        </div>
-    </div>
-    <div class="tab-content container h-75" style="padding:0px !important;">
+            </div>
+            <table class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold">
+                <thead class="fs-7 text-gray-500 text-uppercase">
+                    <th class="min-w-100px">Nombre</th>
+                    <th class="min-w-250px">Descripción</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </thead>
+                <tbody>
+                    <?php $secciones = json_decode($dato['section'], true);
+                    foreach ($secciones as $s): ?>
+                        <tr>
+                            <td><?php echo $s['name'] ?></td>
+                            <td><?php echo $s['desc'] ?></td>
+                            <td><button class="btn btn-sm btn-primary btn-update-modal" data-bs-toggle="modal"
+                                    data-bs-target="#nuevo" data-to-form='<?php echo json_encode($s); ?>'>Editar</button></td>
+                            <td><button class="btn btn-sm btn-primary btn-delete-modal btn-delete-modal"
+                                    data-to-form='<?php echo $s['id']; ?>'>Eliminar</button></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-        <!-- VISTA DE CUADRICULA -->
-        <div id="kt_project_targets_table_pane" class="tab-pane h-100 fade show active" style="overflow: auto;">
-            <span>Detalles UWU</span>
-        </div>
 
+            <form action="index.php?id=<?php echo $dato['pid']; ?>" id="delete" method="POST">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="0">
+            </form>
+            <?php include 'modals/insert.php' ?>
+        <?php endforeach; ?>
     </div>
     <hr>
-    <!-- ?php include 'modals/insert.php' ?>
-    ?php include 'modals/update.php' ?> -->
+
     <?php include '../../includes/footer.html' ?>
+
 
     <script src="../../assets/plugins/global/plugins.bundle.js"></script>
     <script src="../../assets/js/scripts.bundle.js"></script>
@@ -85,4 +141,69 @@
     <script src="../../assets/js/custom/utilities/modals/users-search.js"></script>
     <script src="../../assets/js/custom/utilities/modals/new-target.js"></script>
 </body>
+
 </html>
+<script>
+    const btnInsertModal = document.querySelectorAll('.btn-insert-modal');
+    const btnUpdateModal = document.querySelectorAll('.btn-update-modal');
+    const btnDeleteModal = document.querySelectorAll('.btn-delete-modal');
+    btnInsertModal.forEach(btn => {
+        btn.addEventListener('click', () => {
+            start_form();
+        });
+    });
+    btnUpdateModal.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const object = btn.getAttribute('data-to-form');
+            var json = JSON.parse(object);
+            inputData(json);
+        });
+    });
+    btnDeleteModal.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const forms_delete = $('#delete');
+            const id = btn.getAttribute('data-to-form');
+            forms_delete.find('input[name="id"]').val(id);
+
+            Swal.fire({
+                title: "¿Esta seguro de borrar este elemento?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, eliminar"
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Elemento eliminado",
+                        icon: "success"
+                    });
+                    forms_delete.submit();
+                }
+
+            });
+        });
+    });
+    $('#insert_button')[0].addEventListener('click', () => {
+
+        Swal.fire({
+            title: "¿Esta seguro de guardar estos datos?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, guardar"
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Elemento guardado",
+                    icon: "success"
+                });
+                save();
+            }
+
+        });
+    });
+</script>
