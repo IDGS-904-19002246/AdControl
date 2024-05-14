@@ -2,6 +2,9 @@
 
 
 function conectarDB() {
+    // DB->PLESK
+    // $mysqli = new mysqli("localhost", "adcontrol", "Ev7*5q2a9", "adcontrol");
+    // DB->LOCAL
     $mysqli = new mysqli("localhost", "root", "", "adcontrol");
 
     // Verificar conexión

@@ -112,9 +112,9 @@ class Model {
                 p.pcertificacion,
                 (SELECT COUNT(*)FROM grupos g WHERE g.pid =  p.pid) n_grupo,
                 (
-                    SELECT JSON_ARRAYAGG(
-                        JSON_OBJECT('id',ps.id,'name',ps.nombre,'desc',ps.descripcion)
-                    )FROM programas_secciones ps WHERE ps.fk_id_programa = p.pid
+                    SELECT
+                        JSON_ARRAYAGG(JSON_OBJECT('id',ps.id,'name',ps.nombre,'desc',ps.descripcion))
+                    FROM programas_secciones ps WHERE ps.fk_id_programa = p.pid
                 ) AS 'section'
 
         FROM programas p WHERE p.pid =".$id;
