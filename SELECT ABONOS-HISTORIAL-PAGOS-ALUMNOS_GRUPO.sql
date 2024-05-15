@@ -6,7 +6,7 @@ u.correo,u.telefono,
 u.foto
 
 FROM tbl_usuarios u
-INNER JOIN pv_grupos_usuarios gu ON u.id = gu.fk_id_usuario 
+INNER JOIN pv_grupo_usuario gu ON u.id = gu.fk_id_usuario 
 WHERE u.fk_id_rol = 6 AND gu.fk_id_grupo = 5677;
 
 -- GET HISTORIAL DE PAGOS de ALUMNO
