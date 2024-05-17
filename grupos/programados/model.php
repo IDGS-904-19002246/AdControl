@@ -329,6 +329,69 @@ class Model {
             return 0;
         }        
     }
-    
+
+
+       public function programar($grupo,$seccion){
+        $mysqli = conectarDB();
+        if ($mysqli->connect_error) {die("Error de conexión: " . $mysqli->connect_error);}
+
+        $data_sql = "SELECT
+            g.gf_inicio,
+            JSON_ARRAY(ghd.d0,ghd.d1,ghd.d2,ghd.d3,ghd.d4,ghd.d5,ghd.d6) as dias,
+            ghh.hohoras
+            FROM grupos g
+            INNER JOIN grupos_horarios_dias ghd ON g.hoid = ghd.hoid
+            INNER JOIN grupos_horarios_horas ghh ON g.hohid = ghh.hohid 
+            WHERE g.gid = ".$grupo;
+        $data_result = $mysqli->query($data_sql);
+        if ($data_result) {
+            $primer_fila = $data_result->fetch_assoc();
+
+            $start = $primer_fila[array_keys($primer_fila)[0]];
+            $days = array_keys(json_decode($primer_fila[array_keys($primer_fila)[1]]),1);
+            $hours = $primer_fila[array_keys($primer_fila)[2]];
+
+
+            $sessions = "SELECT*FROM programas_secciones_sesiones pss WHERE pss.fk_id_seccion =".$seccion;
+            $result = $mysqli->query($sessions);
+            $data = array();
+            while ($row = $result->fetch_assoc()) {$data[] = $row;}
+
+            return $data[0]['horas_estimadas'];
+            $hours = $_hours;
+
+            for ($i=0; $i < $data->count();) { 
+
+                if ($_hours >= $data[$i]['horas_estimadas']) {
+                    $_hours - $data[$i]['horas_estimadas']
+                    $i++;
+                    INSERTA
+                }ELSE{
+                 $i;
+                }
+            }
+
+        }else{
+            return 'error';
+        }
+        
+        // -------------------
+        // $datos = array();
+        // while ($row = $data_result->fetch_assoc()) {$datos[] = $row;}
+
+
+        // return $datos;
+
+
+        // $sql = "SELECT*FROM programas_secciones_sesiones pss WHERE pss.fk_id_seccion =".$id;
+
+        // $result = $mysqli->query($sql);
+
+        // $datos = array();
+        // while ($row = $result->fetch_assoc()) {
+
+        //     $datos[] = $row;
+        // }       
+    }
 }
 ?>

@@ -108,6 +108,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         );
         $data = $model->select();
     }
+
+
+    if ($_POST["action"] == 'programar') {
+        $grupo= $_POST["gid"];
+        $seccion=$_POST["id_seccion"];
+        
+        echo json_encode($model->programar($grupo,$seccion));
+    }
 }
 
 

@@ -1571,9 +1571,9 @@ CREATE TABLE IF NOT EXISTS `grupos_horarios_dias` (
 -- Volcando datos para la tabla adcontrol.grupos_horarios_dias: ~36 rows (aproximadamente)
 INSERT INTO `grupos_horarios_dias` (`hoid`, `hodesc`, `hodescripcion`, `hodescC`, `hoactivo`, `hscript`, `d1`, `d2`, `d3`, `d4`, `d5`, `d6`, `d0`, `hodescW`) VALUES
 	(1, 'Lun y Mie', NULL, 'Lunes y Mi&eacute;rcoles', 0, 'a', 1, 0, 1, 0, 0, 0, 0, ''),
-	(2, 'Mar y Jue', NULL, 'Lunes y Mi&eacute;rcoles', 0, 'b', 0, 1, 0, 1, 0, 0, 0, ''),
+	(2, 'Mar y Jue', NULL, 'Lunes,Miercoles', 0, 'b', 0, 1, 0, 1, 0, 0, 0, ''),
 	(3, 'Viernes', NULL, 'Viernes', 0, 'c', 0, 0, 0, 0, 1, 0, 0, ''),
-	(4, 'S&aacute;bado', NULL, 'S&aacute;bado', 0, 'c', 0, 0, 0, 0, 0, 1, 0, ''),
+	(4, 'S&aacute;bado', NULL, 'Sabado', 0, 'c', 0, 0, 0, 0, 0, 1, 0, ''),
 	(5, 'Domingo', NULL, 'Domingo', 0, 'c', 0, 0, 0, 0, 0, 0, 1, ''),
 	(6, 'Diario', NULL, 'Diario', 0, 'd', 1, 1, 1, 1, 1, 1, 1, ''),
 	(7, 'Miercoles', NULL, 'Mi&eacute;rcoles', 0, 'd', 0, 0, 1, 0, 0, 0, 0, ''),
@@ -1587,25 +1587,25 @@ INSERT INTO `grupos_horarios_dias` (`hoid`, `hodesc`, `hodescripcion`, `hodescC`
 	(15, 'Martes', NULL, NULL, 0, 'd', 0, 1, 0, 0, 0, 0, 0, ''),
 	(16, 'Mar, Mier y Jue', NULL, NULL, 0, 'd', 0, 1, 1, 1, 0, 0, 0, ''),
 	(17, 'Sab y Dom', NULL, NULL, 0, 'd', 0, 0, 0, 0, 0, 1, 1, ''),
-	(500, 'LUN Y MIE', 'LUNES Y MIERCOLES', 'Lunes y Mi&eacute;rcoles', 1, 'a', 1, 0, 1, 0, 0, 0, 0, 'Lun y Mie'),
-	(501, 'MAR Y JUE', 'MARTES Y JUEVES', 'Martes y Jueves', 1, 'b', 0, 1, 0, 1, 0, 0, 0, 'Mar y Jue'),
+	(500, 'LUN Y MIE', 'LUNES Y MIERCOLES', 'Lunes,Miercoles', 1, 'a', 1, 0, 1, 0, 0, 0, 0, 'Lun y Mie'),
+	(501, 'MAR Y JUE', 'MARTES Y JUEVES', 'Martes,Jueves', 1, 'b', 0, 1, 0, 1, 0, 0, 0, 'Mar y Jue'),
 	(502, 'VIERNES', 'VIERNES', 'Viernes', 1, 'c', 0, 0, 0, 0, 1, 0, 0, 'Vie'),
-	(503, 'S&aacute;bado', 'SABADO', 'S&aacute;bado', 1, 'c', 0, 0, 0, 0, 0, 1, 0, 'Sab'),
-	(504, 'LUN, MIE Y JUE', 'LUNES, MIERCOLES Y JUEVES', NULL, 1, 'd', 1, 0, 1, 1, 0, 0, 0, 'Lun, Mie y Jue'),
-	(505, 'VIERNES Y SABADOS', 'VIERNES Y SABADOS', 'Viernes y S&aacute;bados', 1, 'b', 0, 0, 0, 0, 1, 1, 0, 'Vier y Sab'),
-	(506, 'MAR Y MIER', 'MARTES Y MIERCOLES', 'Martes y Mi&eacute;rcoles', 1, 'b', 0, 1, 1, 0, 0, 0, 0, 'Mar y Mier'),
-	(507, 'LUN Y JUE', 'LUNES Y JUEVES', 'Lunes y Jueves', 1, 'b', 1, 0, 0, 1, 0, 0, 0, 'Lun y Jue'),
-	(508, 'MAR, MIE Y JUE', 'MARTES, MIERCOLES Y JUEVES', 'Martes, Mi&eacute;rcoles y Jueves', 1, 'd', 0, 1, 1, 1, 0, 0, 0, 'Mar, Mie y Jue'),
-	(509, 'LUN, MIE Y VIE', 'LUNES, MIERCOLES Y VIERNES', 'Lunes, Mi&eacute;rcoles y Viernes', 1, 'd', 1, 0, 1, 0, 1, 0, 0, 'Lun, Mie y Vie'),
-	(510, 'SAB Y DOM', 'SABADO Y DOMINGO', 'S&aacute;bado y Domingo', 1, 'b', 0, 0, 0, 0, 0, 1, 1, 'Sab y Dom'),
-	(511, 'LUN, MAR, MIE, JUE Y VIE', 'LUNES A VIERNES', NULL, 1, 'b', 1, 1, 1, 1, 1, 0, 0, 'Lun, Mar, Mier, Jue y Vie'),
+	(503, 'S&aacute;bado', 'SABADO', 'Sabado', 1, 'c', 0, 0, 0, 0, 0, 1, 0, 'Sab'),
+	(504, 'LUN, MIE Y JUE', 'LUNES, MIERCOLES Y JUEVES', 'Lunes,Miercoles,jueves', 1, 'd', 1, 0, 1, 1, 0, 0, 0, 'Lun, Mie y Jue'),
+	(505, 'VIERNES Y SABADOS', 'VIERNES Y SABADOS', 'Viernes,Sabados', 1, 'b', 0, 0, 0, 0, 1, 1, 0, 'Vier y Sab'),
+	(506, 'MAR Y MIER', 'MARTES Y MIERCOLES', 'Martes,Miercoles', 1, 'b', 0, 1, 1, 0, 0, 0, 0, 'Mar y Mier'),
+	(507, 'LUN Y JUE', 'LUNES Y JUEVES', 'Lunes,Jueves', 1, 'b', 1, 0, 0, 1, 0, 0, 0, 'Lun y Jue'),
+	(508, 'MAR, MIE Y JUE', 'MARTES, MIERCOLES Y JUEVES', 'Martes,Miercoles,Jueves', 1, 'd', 0, 1, 1, 1, 0, 0, 0, 'Mar, Mie y Jue'),
+	(509, 'LUN, MIE Y VIE', 'LUNES, MIERCOLES Y VIERNES', 'Lunes,Miercoles,Viernes', 1, 'd', 1, 0, 1, 0, 1, 0, 0, 'Lun, Mie y Vie'),
+	(510, 'SAB Y DOM', 'SABADO Y DOMINGO', 'Sabado,Domingo', 1, 'b', 0, 0, 0, 0, 0, 1, 1, 'Sab y Dom'),
+	(511, 'LUN, MAR, MIE, JUE Y VIE', 'LUNES A VIERNES', 'Lunes,Martes,Miercoles,Jueves,Viernes', 1, 'b', 1, 1, 1, 1, 1, 0, 0, 'Lun, Mar, Mier, Jue y Vie'),
 	(512, 'LUNES', 'LUNES', 'Lunes', 1, 'b', 1, 0, 0, 0, 0, 0, 0, 'Lun'),
 	(513, 'MARTES', 'MARTES', 'Martes', 1, 'b', 0, 1, 0, 0, 0, 0, 0, 'Mar'),
-	(514, 'MIERCOLES', 'MIERCOLES', 'Mi&eacute;rcoles', 1, 'b', 0, 0, 1, 0, 0, 0, 0, 'Mie'),
+	(514, 'MIERCOLES', 'MIERCOLES', 'Miercoles', 1, 'b', 0, 0, 1, 0, 0, 0, 0, 'Mie'),
 	(515, 'JUEVES', 'JUEVES', 'Jueves', 1, 'b', 0, 0, 0, 1, 0, 0, 0, 'Jue'),
-	(516, 'MIE, JUE, VIE Y SAB', 'MIERCOLES A SABADO', 'Mi&eacute;rcoles, Jueves, Viernes y S&aacute;dado', 1, 'b', 0, 0, 1, 1, 1, 1, 0, 'Mie, Jue, Vie y Sab'),
-	(517, 'LUN, MAR Y MIER', 'LUNES, MARTES Y MIERCOLES', 'Lunes, Martes y Miercoles', 1, 'd', 1, 1, 1, 0, 0, 0, 0, 'Lun, Mar y Mie'),
-	(518, 'MIE Y VIE', 'MIERCOLES Y VIERNES', 'Miercoles y Viernes', 1, 'a', 0, 0, 1, 0, 1, 0, 0, 'Mie y Vie');
+	(516, 'MIE, JUE, VIE Y SAB', 'MIERCOLES A SABADO', 'Miercoles,Jueves,Viernes,Sabado', 1, 'b', 0, 0, 1, 1, 1, 1, 0, 'Mie, Jue, Vie y Sab'),
+	(517, 'LUN, MAR Y MIER', 'LUNES, MARTES Y MIERCOLES', 'Lunes,Martes,Miercoles', 1, 'd', 1, 1, 1, 0, 0, 0, 0, 'Lun, Mar y Mie'),
+	(518, 'MIE Y VIE', 'MIERCOLES Y VIERNES', 'Miercoles,Viernes', 1, 'a', 0, 0, 1, 0, 1, 0, 0, 'Mie y Vie');
 
 -- Volcando estructura para tabla adcontrol.grupos_horarios_horas
 CREATE TABLE IF NOT EXISTS `grupos_horarios_horas` (
@@ -1742,6 +1742,70 @@ INSERT INTO `links` (`lid`, `lurl`, `lslug`, `lname`, `ltipo`, `lhits`, `lcreado
 	(35, 'https://auladiser.work/wp-content/uploads/2024/01/ADOBE-ATC.pdf', 'adobeatc', 'ADOBE ATC', NULL, NULL, '2024-03-07 17:49:11'),
 	(36, 'https://wa.me/525527817689?text=Hola,%20vi%20su%20correo%20sobre%20SolidWorks%20y%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s.', 'emsolid', 'eMailMKT Solid', NULL, NULL, '2024-03-12 17:00:53'),
 	(37, 'https://wa.me/525527817689?text=Hola,%20vi%20su%20correo%20sobre%20CreaciÃ³n%20%20Digital%20y%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s.', 'emcdig', 'eMailMKT CreaciÃ³n Digital', NULL, NULL, '2024-03-13 18:23:43');
+
+-- Volcando estructura para procedimiento adcontrol.programar
+DELIMITER //
+CREATE PROCEDURE `programar`(
+	IN `id_grupo` INT,
+	IN `id_seccion` INT,
+	IN `id_usuario` INT
+)
+BEGIN
+DECLARE inicio DATE;
+DECLARE dias VARCHAR(32);
+DECLARE horas INT;
+DECLARE sesions INT;
+DECLARE contador INT;
+
+SET inicio = (SELECT g.gf_inicio FROM grupos g WHERE g.gid = id_grupo);
+SET dias = (SELECT concat(
+	ghd.d0,
+	ghd.d1,
+	ghd.d2,
+	ghd.d3,
+	ghd.d4,
+	ghd.d5,
+	ghd.d6
+	) as dias FROM grupos g INNER JOIN grupos_horarios_dias ghd ON g.hoid = ghd.hoid WHERE g.gid = id_grupo);
+SET horas = (SELECT ghh.hohoras FROM grupos g INNER JOIN grupos_horarios_horas ghh ON g.hohid = ghh.hohid WHERE g.gid = id_grupo);
+SET sesions = (SELECT COUNT(*) FROM programas_secciones_sesiones pss WHERE  pss.fk_id_seccion = id_seccion);
+set contador = 0;
+
+
+
+WHILE (contador <= sesions) DO
+
+	IF SUBSTRING(dias, DAYOFWEEK(inicio), 1) = 1 THEN
+		
+		IF
+			(SELECT COUNT(*) FROM tbl_asuetos a WHERE inicio BETWEEN a.inicio AND a.fin) = 0 AND
+			(SELECT COUNT(*) FROM tbl_nominas n
+				INNER JOIN tbl_nomina_vacaciones nv ON n.id = nv.fk_id_nomina
+				WHERE n.fk_id_usuario = id_usuario AND inicio BETWEEN nv.fecha_inicio AND nv.fecha_fin) = 0 THEN
+				
+			SELECT id_grupo 'grupo', inicio 'fecha';
+			SET contador= contador+1;
+			
+		END IF;
+		
+		SET inicio = DATE_ADD(inicio, INTERVAL 1 DAY);
+	ELSE
+		-- NO ES DIA DEL HORARIO
+		SET inicio = DATE_ADD(inicio, INTERVAL 1 DAY);
+	END IF;
+	
+END WHILE;
+
+-- INNER INTO tbl_grupos_sesiones(fk_id_grupo,fk_id_sesion,fecha_estimada,estado)
+
+
+-- SELECT id_grupo,
+
+-- FROM programas_secciones_sesiones pss WHERE pss.fk_id_seccion = id_seccion;
+
+
+END//
+DELIMITER ;
 
 -- Volcando estructura para tabla adcontrol.programas
 CREATE TABLE IF NOT EXISTS `programas` (
@@ -13928,12 +13992,12 @@ CREATE TABLE IF NOT EXISTS `programas_secciones` (
   PRIMARY KEY (`id`),
   KEY `FK_programas_secciones_programas` (`fk_id_programa`),
   CONSTRAINT `FK_programas_secciones_programas` FOREIGN KEY (`fk_id_programa`) REFERENCES `programas` (`pid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
 -- Volcando datos para la tabla adcontrol.programas_secciones: ~2 rows (aproximadamente)
 INSERT INTO `programas_secciones` (`id`, `fk_id_programa`, `nombre`, `descripcion`) VALUES
-	(1, 717, 'section 1', 'es la seccion 1·'),
-	(2, 717, 'seccion 1.1', 'es la seccion 2º');
+	(1, 923, 'section 1', 'es la seccion 1·'),
+	(2, 923, 'seccion 1.1', 'es la seccion 2º');
 
 -- Volcando estructura para tabla adcontrol.programas_secciones_sesiones
 CREATE TABLE IF NOT EXISTS `programas_secciones_sesiones` (
@@ -13944,12 +14008,13 @@ CREATE TABLE IF NOT EXISTS `programas_secciones_sesiones` (
   PRIMARY KEY (`id`),
   KEY `FK_programa_secciones_sesiones_programas_secciones` (`fk_id_seccion`),
   CONSTRAINT `FK_programa_secciones_sesiones_programas_secciones` FOREIGN KEY (`fk_id_seccion`) REFERENCES `programas_secciones` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla adcontrol.programas_secciones_sesiones: ~2 rows (aproximadamente)
 INSERT INTO `programas_secciones_sesiones` (`id`, `fk_id_seccion`, `tema`, `horas_estimadas`) VALUES
 	(1, 1, 'introduccion', 1.5),
-	(2, 2, 'que es html', 1);
+	(2, 2, 'que es html', 2),
+	(3, 1, 'introduccion 2', 1);
 
 -- Volcando estructura para tabla adcontrol.programas_tipos
 CREATE TABLE IF NOT EXISTS `programas_tipos` (
@@ -14032,7 +14097,7 @@ CREATE TABLE IF NOT EXISTS `pv_rol_modulo` (
   CONSTRAINT `FK_pv_rol_modulo_tbl_usuarios_roles` FOREIGN KEY (`fk_id_rol`) REFERENCES `tbl_usuarios_roles` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla adcontrol.pv_rol_modulo: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla adcontrol.pv_rol_modulo: ~4 rows (aproximadamente)
 INSERT INTO `pv_rol_modulo` (`id`, `fk_id_rol`, `fk_id_modulo`) VALUES
 	(1, 6, 2),
 	(2, 6, 3),
@@ -14050,21 +14115,11 @@ CREATE TABLE IF NOT EXISTS `tbl_abonos` (
   CONSTRAINT `FK_tbl_abonos_tbl_pagos` FOREIGN KEY (`fk_id_pago`) REFERENCES `tbl_pagos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
--- Volcando datos para la tabla adcontrol.tbl_abonos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla adcontrol.tbl_abonos: ~3 rows (aproximadamente)
 INSERT INTO `tbl_abonos` (`id`, `fk_id_pago`, `fecha`, `pago`) VALUES
 	(1, 2, '2024-05-13', 500),
 	(2, 2, '2024-05-13', 500),
 	(3, 2, '2024-05-13', 500);
-
--- Volcando estructura para tabla adcontrol.tbl_areas
-CREATE TABLE IF NOT EXISTS `tbl_areas` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(32) DEFAULT NULL,
-  `actividades` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='nombre= Areas de trabajo: diseño, desarrollo, intructor,\r\nactividad: que hace en su trabajo';
-
--- Volcando datos para la tabla adcontrol.tbl_areas: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla adcontrol.tbl_asistencias
 CREATE TABLE IF NOT EXISTS `tbl_asistencias` (
@@ -14106,10 +14161,10 @@ CREATE TABLE IF NOT EXISTS `tbl_asuetos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla adcontrol.tbl_asuetos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla adcontrol.tbl_asuetos: ~2 rows (aproximadamente)
 INSERT INTO `tbl_asuetos` (`id`, `nombre`, `inicio`, `fin`, `ahno`) VALUES
 	(1, 'navidad', '2025-05-14', '2024-05-14', 0),
-	(4, 'mayo', '2025-12-25', '2025-05-15', 1);
+	(4, 'mayo', '2024-03-30', '2024-03-30', 1);
 
 -- Volcando estructura para tabla adcontrol.tbl_aulas
 CREATE TABLE IF NOT EXISTS `tbl_aulas` (
@@ -14153,7 +14208,7 @@ CREATE TABLE IF NOT EXISTS `tbl_evaluacion_preguntas` (
   CONSTRAINT `FK__tbl_evaluaciones` FOREIGN KEY (`fk_id_evaluacion`) REFERENCES `tbl_evaluaciones` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla adcontrol.tbl_evaluacion_preguntas: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla adcontrol.tbl_evaluacion_preguntas: ~2 rows (aproximadamente)
 INSERT INTO `tbl_evaluacion_preguntas` (`id`, `fk_id_evaluacion`, `pregunta`, `abierta`, `valor`, `imagen`) VALUES
 	(1, 1, 'de que color es el cielo', 0, 1, NULL),
 	(2, 1, 'cuantos dedos tengo', 0, 2, 'mano.png'),
@@ -14170,7 +14225,7 @@ CREATE TABLE IF NOT EXISTS `tbl_evaluacion_respuestas` (
   CONSTRAINT `FK_tbl_evaluacion_respuestas_tbl_evaluacion_preguntas` FOREIGN KEY (`fk_id_pregunta`) REFERENCES `tbl_evaluacion_preguntas` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla adcontrol.tbl_evaluacion_respuestas: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla adcontrol.tbl_evaluacion_respuestas: ~4 rows (aproximadamente)
 INSERT INTO `tbl_evaluacion_respuestas` (`id`, `fk_id_pregunta`, `respuesta`, `correcta`) VALUES
 	(1, 1, 'azul', 1),
 	(2, 1, 'rojo', 0),
@@ -14209,7 +14264,7 @@ CREATE TABLE IF NOT EXISTS `tbl_modulos_sub` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla adcontrol.tbl_modulos_sub: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla adcontrol.tbl_modulos_sub: ~10 rows (aproximadamente)
 INSERT INTO `tbl_modulos_sub` (`id`, `nombre`, `ruta`, `icono`, `modulo`) VALUES
 	(1, 'admin grupos', 'index.php', 'icon', 'admin'),
 	(2, 'admin alumnos', 'index.php', 'icon', 'admin'),
@@ -14227,23 +14282,21 @@ CREATE TABLE IF NOT EXISTS `tbl_nominas` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `fk_id_usuario` int unsigned NOT NULL,
   `fk_id_jornada` int unsigned NOT NULL,
-  `fk_id_area` int unsigned NOT NULL,
   `fecha_contratacion` date DEFAULT NULL,
   `fecha_despido` date DEFAULT NULL,
   `sueldo` int DEFAULT NULL,
   `dias_vacaciones` int DEFAULT NULL,
-  `dias_vacaciones_ano` int DEFAULT NULL,
   `rfc` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_tbl_nomina_tbl_usuarios` (`fk_id_usuario`),
-  KEY `FK_tbl_nomina_tbl_areas` (`fk_id_area`),
   KEY `FK_tbl_nominas_tbl_nomina_jornadas` (`fk_id_jornada`),
-  CONSTRAINT `FK_tbl_nomina_tbl_areas` FOREIGN KEY (`fk_id_area`) REFERENCES `tbl_areas` (`id`),
   CONSTRAINT `FK_tbl_nomina_tbl_usuarios` FOREIGN KEY (`fk_id_usuario`) REFERENCES `tbl_usuarios` (`id`),
   CONSTRAINT `FK_tbl_nominas_tbl_nomina_jornadas` FOREIGN KEY (`fk_id_jornada`) REFERENCES `tbl_nomina_jornadas` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla adcontrol.tbl_nominas: ~0 rows (aproximadamente)
+INSERT INTO `tbl_nominas` (`id`, `fk_id_usuario`, `fk_id_jornada`, `fecha_contratacion`, `fecha_despido`, `sueldo`, `dias_vacaciones`, `rfc`) VALUES
+	(1, 3, 2, '2024-05-17', '2025-05-17', 500, 10, 'xxxxxxxx');
 
 -- Volcando estructura para tabla adcontrol.tbl_nomina_jornadas
 CREATE TABLE IF NOT EXISTS `tbl_nomina_jornadas` (
@@ -14281,9 +14334,11 @@ CREATE TABLE IF NOT EXISTS `tbl_nomina_vacaciones` (
   PRIMARY KEY (`id`),
   KEY `FK_tbl_nomina_vacaciones_tbl_nominas` (`fk_id_nomina`),
   CONSTRAINT `FK_tbl_nomina_vacaciones_tbl_nominas` FOREIGN KEY (`fk_id_nomina`) REFERENCES `tbl_nominas` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla adcontrol.tbl_nomina_vacaciones: ~0 rows (aproximadamente)
+INSERT INTO `tbl_nomina_vacaciones` (`id`, `fk_id_nomina`, `fecha_inicio`, `fecha_fin`) VALUES
+	(1, 1, '2024-04-06', '2024-04-06');
 
 -- Volcando estructura para tabla adcontrol.tbl_pagos
 CREATE TABLE IF NOT EXISTS `tbl_pagos` (
@@ -14298,7 +14353,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pagos` (
   CONSTRAINT `FK_tbl_pagos_pv_grupos_usuarios` FOREIGN KEY (`fk_id_grupos_usuarios`) REFERENCES `pv_grupo_usuario` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
--- Volcando datos para la tabla adcontrol.tbl_pagos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla adcontrol.tbl_pagos: ~2 rows (aproximadamente)
 INSERT INTO `tbl_pagos` (`id`, `fk_id_grupos_usuarios`, `costo`, `pago`, `metodo`, `fecha`) VALUES
 	(2, 923, 5800, 1500, 'ABONO', '2024-05-13'),
 	(3, 500, 5000, 5000, 'CONTADO', '2024-05-13');
@@ -14337,7 +14392,7 @@ CREATE TABLE IF NOT EXISTS `tbl_usuarios` (
   CONSTRAINT `FK_tbl_usuarios_tbl_usuarios_roles` FOREIGN KEY (`fk_id_rol`) REFERENCES `tbl_usuarios_roles` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
--- Volcando datos para la tabla adcontrol.tbl_usuarios: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla adcontrol.tbl_usuarios: ~4 rows (aproximadamente)
 INSERT INTO `tbl_usuarios` (`id`, `fk_id_rol`, `correo`, `correo2`, `password`, `nombre`, `apellidos`, `edad`, `sexo`, `foto`, `telefono`, `telefono2`) VALUES
 	(1, 6, 'brandon.equipodigitalmx@gmail.com', 'brandon.equipodigitalmx@gmail.com.mx', '1234', 'Brandon', 'Villalobos', 27, 'H', '1.jpg', '4771234567', '4771234567'),
 	(2, 6, 'juan@gmail.com', 'juan@gmail.com.mx', '1234', 'juan jr', 'martinez', 28, 'M', '2.jpg', '4771234567', '4771234567'),
